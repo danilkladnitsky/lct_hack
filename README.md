@@ -1,6 +1,9 @@
 # Сервис прогнозирования работ по содержанию и ремонту объектов городского хозяйства
 
 ## Frontend
+### Figma
+https://www.figma.com/file/OIPNK7Igx0FmHYpt1ldXDU/ICT-Hackathon-%7C-Design?type=design&node-id=0%3A1&t=lp3wcARWPoH5Ii4o-1
+
 ### Страницы
 1. Страница авторизации
 2. Страница с картой (Дашборд)
