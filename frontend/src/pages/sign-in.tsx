@@ -26,9 +26,20 @@ const SignIn: FC = () => {
 
   return (
     <AuthLayout>
-      <Paper component={Flex} direction={'column'} align={'center'} gap={'10px'} w={'320px'} shadow="xl" p="md" radius={'md'}>
-        <Text fz={'xl'} fw={600}>Вход</Text>
-        <Flex w={'100%'} direction={'column'} gap={'10px'} justify={'space-between'}>
+      <Paper component={Flex}
+        direction={'column'}
+        align={'center'}
+        gap={'10px'}
+        w={'320px'}
+        shadow="xl"
+        p="md"
+        radius={'md'}>
+        <Text fz={'xl'}
+          fw={600}>Вход</Text>
+        <Flex w={'100%'}
+          direction={'column'}
+          gap={'10px'}
+          justify={'space-between'}>
           <Box h={'100px'}>
             <Input.Wrapper
               w={'100%'}
@@ -61,14 +72,19 @@ const SignIn: FC = () => {
             />
           </Box>
         </Flex>
-        <Flex direction={'column'} w={'100%'} gap={'10px'}>
+        <Flex direction={'column'}
+          w={'100%'}
+          gap={'10px'}>
           <Button disabled={!formik.isValid}
             onClick={() => formik.handleSubmit()}>
                 Вход
           </Button>
-          <Flex direction={'column'} align={'center'}>
+          <Flex direction={'column'}
+            align={'center'}>
             <Text>Еще нет аккаунта?</Text>
-            <Text component={Link} to={'/sign-up'} td={'underline'}>Регистрация</Text>
+            <Text component={Link}
+              to={'/sign-up'}
+              td={'underline'}>Регистрация</Text>
           </Flex>
         </Flex>
       </Paper>

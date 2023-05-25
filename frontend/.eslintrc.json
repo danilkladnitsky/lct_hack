@@ -82,6 +82,7 @@
         }
     ],
     "rules": {
+        "react/jsx-max-props-per-line": ["warn", { "maximum": { "single": 1, "multi": 1 } }],
         "max-len": [
             "error",
             {
