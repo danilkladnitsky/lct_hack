@@ -1,40 +1,45 @@
-import React from 'react';
-import { Map as GlMap } from 'react-map-gl';
-import { HeatmapLayer } from '@deck.gl/aggregation-layers';
-import DeckGL from '@deck.gl/react';
-import maplibregl from 'maplibre-gl';
+import React, { useState } from "react";
+import { Map as GlMap } from "react-map-gl";
+import { DEFAULT_MAP_PARAMETERS } from "constants/map";
+import DeckGL from "deck.gl";
+import maplibregl from "maplibre-gl";
 
-import styles from './Map.module.scss';
+import { renderLayers } from "./MapLayers";
 
-const INITIAL_VIEW_STATE = {
-  zoom: 0,
-  pitch: 0,
-  bearing: 0,
-};
+import styles from "./Map.module.scss";
 
-const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json';
-const DATA_URL =
-  'https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/screen-grid/uber-pickup-locations.json'; // eslint-disable-line
+const MAP_STYLE = "https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json";
 
-const Map = () => {
-  const layers = [
-    new HeatmapLayer({
-      data: DATA_URL,
-      id: 'heatmp-layer',
-      pickable: false,
-    }),
-  ];
+interface Props {
+  lng: number;
+  lat: number;
+  zoom: number;
+}
+
+const Map = ({
+  lat = DEFAULT_MAP_PARAMETERS.lat,
+  lng = DEFAULT_MAP_PARAMETERS.lng,
+  zoom = DEFAULT_MAP_PARAMETERS.zoom
+}: Props) => {
+  const [viewState] = useState({
+    longitude: lat,
+    latitude: lng,
+    zoom: zoom,
+    maxZoom: 16
+  });
 
   return (
     <DeckGL
-      initialViewState={INITIAL_VIEW_STATE}
+      layers={renderLayers()}
       controller={true}
-      layers={layers}>
-      {/* <Map
+      initialViewState={viewState}
+    >
+      <GlMap
+        reuseMaps
         mapLib={maplibregl}
         mapStyle={MAP_STYLE}
         preventStyleDiffing={true}
-      /> */}
+      />
     </DeckGL>
   );
 };

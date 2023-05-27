@@ -2,18 +2,22 @@ import React from "react";
 import { Analyze } from "tabler-icons-react";
 import ActionButton from "ui/shared/ActionButton/ActionButton";
 
+import useCombinedStore from "store";
+
 import styles from "./OpenAnalyzeForm.module.scss";
 
-type Props = {
-    onClick: () => void;
-}
+const OpenAnalyzeForm = () => {
+  const { setAnalyzeFrameVisibility } = useCombinedStore();
 
-const OpenAnalyzeForm = ({ onClick }: Props) => {
+  const openForm = () => {
+    setAnalyzeFrameVisibility(true);
+  };
+
   return (
     <div className={styles.btnWrapper}>
       <ActionButton
         className={styles.analyzeBtn}
-        onClick={onClick}
+        onClick={openForm}
         leftIcon={<Analyze />}
       >
         Создать прогноз

@@ -2,8 +2,6 @@ import { StateCreator } from "zustand";
 import { produce } from "immer";
 import { GetOptionsResponse, ResultRequest, ResultResponse } from "types/core";
 
-type EbaloPsa = () => void;
-
 type AnalyzeState = {
   options: GetOptionsResponse | null;
   analyzeRequest: ResultRequest;
