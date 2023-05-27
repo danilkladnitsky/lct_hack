@@ -2,23 +2,23 @@ import React from 'react';
 import { Button, ButtonProps } from '@mantine/core';
 import classNames from 'classnames';
 
-import styles from './MenuButton.module.scss';
+import styles from './ActionButton.module.scss';
 
 interface Props {
   selected?: boolean;
   onClick?: () => void;
 }
 
-const MenuButton = ({ selected, onClick, ...rest }: ButtonProps & Props) => {
+const ActionButton = ({ selected, onClick, className, ...rest }: ButtonProps & Props) => {
   return (
     <Button
       variant={'outline'}
       compact
       radius={0}
-      className={classNames(styles.menuBtn, { [styles.selected]: selected })}
+      className={classNames(styles.btn, { [styles.selected]: selected }, className)}
       onClick={onClick}
       {...rest} />
   );
 };
 
-export default MenuButton;
+export default ActionButton;

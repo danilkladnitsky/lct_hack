@@ -3,7 +3,6 @@ import { API_ROUTES } from 'constants/ApiRoutes';
 import { api } from './api';
 
 export default class AuthService {
-
   static info = () => {
     return api.get<any>(API_ROUTES.auth.info);
   };

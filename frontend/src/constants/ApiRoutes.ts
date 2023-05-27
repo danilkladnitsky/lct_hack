@@ -5,4 +5,7 @@ export const API_ROUTES = {
     register: '/auth/register',
     info: '/auth/info',
   },
+  HISTORY: {
+    GET_HISTORY: '/history',
+  },
 };

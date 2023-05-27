@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Dashboard, History, SignIn, SignUp } from 'pages';
+import { DashboardPage, History, SignIn, SignUp } from 'pages';
 import Analyze from 'pages/Analyze';
 
 import { PATHS } from '../constants/RouterPaths';
@@ -14,7 +14,7 @@ const Router = () => {
       />
       <Route
         path={PATHS.dashboard}
-        element={Dashboard}
+        element={DashboardPage}
       />
       <Route
         path={PATHS.analyze}
@@ -23,6 +23,10 @@ const Router = () => {
       <Route
         path={PATHS.history}
         element={History}
+      />
+      <Route
+        path={PATHS.signIn}
+        element={SignIn}
       />
       <Route
         path={PATHS.signUp}
