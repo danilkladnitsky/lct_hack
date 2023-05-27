@@ -1,4 +1,6 @@
 import React, { FC } from 'react';
+import withLayout from 'hoc/withLayout';
+import { AppLayout } from 'layouts';
 
 const Dashboard: FC = () => {
   return (
@@ -8,4 +10,4 @@ const Dashboard: FC = () => {
   );
 };
 
-export default Dashboard;
+export default withLayout(AppLayout, <Dashboard />);

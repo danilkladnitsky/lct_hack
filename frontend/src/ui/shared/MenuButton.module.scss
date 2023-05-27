@@ -1,0 +1,9 @@
+.menuBtn {
+    border: none;
+
+    color: var(--primary-accent);
+
+    &:hover {
+        background: transparent;
+    }
+}

@@ -24,5 +24,5 @@ const initialState = {
 export const createAuthSlice: StateCreator<AuthSlice> = (set) => ({
   ...initialState,
   login: () => set(() => ({ isLogined: true, username: 'x1kk4', id: 1337 })),
-  logout: () => set(() => ({ isLogined: false, username: null, id: null })),
+  logout: () => set(() => ({ isLogined: true, username: null, id: null })),
 });

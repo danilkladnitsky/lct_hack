@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Button, Flex, Input, Paper, PasswordInput, Text } from '@mantine/core';
 import { useFormik } from 'formik';
+import withLayout from 'hoc/withLayout';
 import { AuthLayout } from 'layouts';
 import * as yup from 'yup';
 
@@ -92,4 +93,4 @@ const SignIn: FC = () => {
   );
 };
 
-export default SignIn;
+export default withLayout(AuthLayout, <SignIn />);

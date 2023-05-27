@@ -1,19 +1,21 @@
 
 import React, { FC } from 'react';
-import { Flex } from '@mantine/core';
-import { Header } from 'components';
+import { BrowserRouter } from 'react-router-dom';
+import { MantineProvider } from '@mantine/core';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Router from 'router';
 
-import useCombinedStore from 'store';
+const queryClient = new QueryClient();
 
 const App: FC = () => {
-  const { isLogined } = useCombinedStore();
-
   return (
-    <Flex direction={'column'} mih={'100vh'}>
-      <Header h={'70px'}/>
-      <Router isLogined={isLogined}/>
-    </Flex>
+    <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <MantineProvider>
+          <Router />
+        </MantineProvider>
+      </QueryClientProvider>
+    </BrowserRouter>
   );
 };
 

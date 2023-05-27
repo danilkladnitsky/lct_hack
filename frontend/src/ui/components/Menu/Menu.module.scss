@@ -1,0 +1,12 @@
+.menu {
+    min-width: 80px;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+
+    border-right: 1px solid var(--secondary-bg);
+}
