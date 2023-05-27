@@ -1,0 +1,13 @@
+.history {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    padding: 24px;
+}
+
+.recordList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}

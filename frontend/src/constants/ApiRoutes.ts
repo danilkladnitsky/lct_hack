@@ -10,4 +10,7 @@ export const API_ROUTES = {
     options: "/options",
     result: "/result",
   },
+  HISTORY: {
+    GET_HISTORY: '/history',
+  },
 };

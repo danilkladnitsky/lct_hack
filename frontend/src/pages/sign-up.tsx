@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Button, Flex, Input, Paper, PasswordInput, Text } from '@mantine/core';
 import { useFormik } from 'formik';
+import withLayout from 'hoc/withLayout';
 import { AuthLayout } from 'layouts';
 import * as yup from 'yup';
 
@@ -28,9 +29,20 @@ const SignUp: FC = () => {
 
   return (
     <AuthLayout>
-      <Paper component={Flex} direction={'column'} align={'center'} gap={'10px'} w={'320px'} shadow="xl" p="md" radius={'md'}>
-        <Text fz={'xl'} fw={600}>Регистрация</Text>
-        <Flex w={'100%'} direction={'column'} gap={'10px'} justify={'space-between'}>
+      <Paper component={Flex}
+        direction={'column'}
+        align={'center'}
+        gap={'10px'}
+        w={'320px'}
+        shadow="xl"
+        p="md"
+        radius={'md'}>
+        <Text fz={'xl'}
+          fw={600}>Регистрация</Text>
+        <Flex w={'100%'}
+          direction={'column'}
+          gap={'10px'}
+          justify={'space-between'}>
           <Box h={'100px'}>
             <Input.Wrapper
               w={'100%'}
@@ -78,14 +90,19 @@ const SignUp: FC = () => {
             />
           </Box>
         </Flex>
-        <Flex direction={'column'} w={'100%'} gap={'10px'}>
+        <Flex direction={'column'}
+          w={'100%'}
+          gap={'10px'}>
           <Button disabled={!formik.isValid}
             onClick={() => formik.handleSubmit()}>
                 Регистрация
           </Button>
-          <Flex direction={'column'} align={'center'}>
+          <Flex direction={'column'}
+            align={'center'}>
             <Text>Уже регистрировались?</Text>
-            <Text component={Link} to={'/sign-in'} td={'underline'}>Вход</Text>
+            <Text component={Link}
+              to={'/sign-in'}
+              td={'underline'}>Вход</Text>
           </Flex>
         </Flex>
       </Paper>
@@ -93,4 +110,4 @@ const SignUp: FC = () => {
   );
 };
 
-export default SignUp;
+export default withLayout(AuthLayout, <SignUp />);
