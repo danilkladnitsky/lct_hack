@@ -1,4 +1,6 @@
 import React, { FC } from 'react';
+import withLayout from 'hoc/withLayout';
+import { AppLayout } from 'layouts';
 
 const History: FC = () => {
   return (
@@ -8,4 +10,4 @@ const History: FC = () => {
   );
 };
 
-export default History;
+export default withLayout(AppLayout, <History />);

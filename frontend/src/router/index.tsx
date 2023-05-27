@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Dashboard, History, SignIn, SignUp } from 'pages';
+import Analyze from 'pages/Analyze';
 
 import { PATHS } from '../constants/RouterPaths';
 
@@ -16,8 +17,12 @@ const Router = () => {
         element={Dashboard}
       />
       <Route
+        path={PATHS.analyze}
+        element={Analyze}
+      />
+      <Route
         path={PATHS.history}
-        element={<History />}
+        element={History}
       />
       <Route
         path={PATHS.signUp}
