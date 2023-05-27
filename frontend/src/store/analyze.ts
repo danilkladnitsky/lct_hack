@@ -4,22 +4,22 @@ import { GetOptionsResponse, ResultRequest, ResultResponse } from "types/core";
 
 type EbaloPsa = () => void;
 
-type CoreState = {
+type AnalyzeState = {
   options: GetOptionsResponse | null;
-  queryParams: ResultRequest;
+  analyzeRequest: ResultRequest;
   result: ResultResponse | null;
 };
 
-type CoreActions = {
+type AnalyzeActions = {
   setOptions: (data: GetOptionsResponse) => void;
   setResult: (data: ResultResponse) => void;
 };
 
-export type CoreSlice = CoreState & CoreActions;
+export type AnalyzeSlice = AnalyzeState & AnalyzeActions;
 
 const initialState = {
   options: null,
-  queryParams: {
+  analyzeRequest: {
     source: [],
     work_type: [],
     address: [],
@@ -32,7 +32,7 @@ const initialState = {
   result: null,
 };
 
-export const createCoreSlice: StateCreator<CoreSlice> = (set) => ({
+export const createAnalyzeSlice: StateCreator<AnalyzeSlice> = (set) => ({
   ...initialState,
   setOptions: (data) =>
     set(

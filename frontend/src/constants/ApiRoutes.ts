@@ -6,7 +6,7 @@ export const API_ROUTES = {
     info: "/auth/info",
   },
 
-  core: {
+  analyze: {
     options: "/options",
     result: "/result",
   },

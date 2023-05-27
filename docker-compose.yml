@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: frontend
+    ports:
+      - 80:80
+    container_name: frontend
+    image: danyakladnitsky/lct-hack-frontend:latest
