@@ -1,10 +1,10 @@
 import { create } from "zustand";
 
-import { AuthSlice, createAuthSlice } from './auth';
-import { createCoreSlice } from "./core";
-import { createHistorySlice, HistorySlice } from './history';
+import { AuthSlice, createAuthSlice } from "./auth";
+import { CoreSlice, createCoreSlice } from "./core";
+import { createHistorySlice, HistorySlice } from "./history";
 
-const useCombinedStore = create<AuthSlice & HistorySlice>()((...a) => ({
+const useCombinedStore = create<AuthSlice & HistorySlice & CoreSlice>()((...a) => ({
   ...createAuthSlice(...a),
   ...createHistorySlice(...a),
   ...createCoreSlice(...a)
