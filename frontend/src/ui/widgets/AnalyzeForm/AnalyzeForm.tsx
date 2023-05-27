@@ -12,18 +12,21 @@ import styles from "./AnalyzeForm.module.scss";
 const DEFAULT_PROPS = { opacity: 0.5, blur: 4 };
 
 type Props = {
-    opened: boolean;
-    onClose: () => void;
     children?: ReactNode;
 }
 
-const AnalyzeForm = ({ opened, onClose, children }: Props) => {
+const AnalyzeForm = ({ children }: Props) => {
   const analyzeFormData = useCombinedStore(state => state.analyzeRequest);
+  const { analyzeFrameVisible, setAnalyzeFrameVisibility } = useCombinedStore();
+
+  const closeForm = () => {
+    setAnalyzeFrameVisibility(false);
+  };
 
   return (
     <Drawer
-      opened={opened}
-      onClose={onClose}
+      opened={analyzeFrameVisible}
+      onClose={closeForm}
       overlayProps={DEFAULT_PROPS}
       position="right"
       withCloseButton={false}
@@ -57,7 +60,7 @@ const AnalyzeForm = ({ opened, onClose, children }: Props) => {
           </Button>
           <Button
             fullWidth
-            onClick={onClose}
+            onClick={closeForm}
             color={"red"}
           >
             Закрыть
