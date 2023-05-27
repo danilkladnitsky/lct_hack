@@ -10,7 +10,7 @@ const App: FC = () => {
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <MantineProvider>
+        <MantineProvider theme={{ colorScheme: "dark" }}>
           <Router />
         </MantineProvider>
       </QueryClientProvider>

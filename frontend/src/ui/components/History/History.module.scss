@@ -1,13 +1,18 @@
 .history {
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-
+    align-items: center;
     padding: 24px;
+    gap: 16px;
 }
 
 .recordList {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    flex: 1;
+
+    max-width: 992px;
 }

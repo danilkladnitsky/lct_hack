@@ -1,6 +1,6 @@
-import { StateCreator } from 'zustand';
-import { MOCKED_HISTORY_RECORDS } from 'mocked/history';
-import { HistoryRecord } from 'types/history';
+import { StateCreator } from "zustand";
+import { MOCKED_HISTORY_RECORDS } from "mocked/history";
+import { HistoryRecord } from "types/history";
 
 type State = {
     records: HistoryRecord[];

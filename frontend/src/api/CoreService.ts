@@ -3,12 +3,12 @@ import { GetOptionsResponse, ResultRequest, ResultResponse } from "types/core";
 
 import { api } from "./api";
 
-export default class CoreService {
+export default class AnalyzeService {
   static getOptions = () => {
-    return api.get<GetOptionsResponse>(API_ROUTES.core.options);
+    return api.get<GetOptionsResponse>(API_ROUTES.analyze.options);
   };
 
   static mlPrediction = (data: ResultRequest) => {
-    return api.post<ResultResponse>(API_ROUTES.core.result, data);
+    return api.post<ResultResponse>(API_ROUTES.analyze.result, data);
   };
 }
