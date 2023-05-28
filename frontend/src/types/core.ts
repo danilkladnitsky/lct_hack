@@ -11,4 +11,7 @@ export type ResultRequest = {
 export type ResultResponse = {
   work: string[];
   unom: number[];
-};
+  latitude: Latitude;
+  longitude: Longitude;
+  address: string;
+}[];

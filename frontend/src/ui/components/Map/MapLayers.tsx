@@ -23,15 +23,14 @@ export function renderLayers(data: MapData[]) {
     colorRange,
     coverage: 0.5,
     data,
-    getPosition: (d) => [d.longitude, d.latitude],
+    getPosition: (d) => [+d.longitude, +d.latitude],
     pickable: true,
     radius: 100,
     material,
-    elevationRange: [0, 500],
-    elevationScale: 50,
+    elevationRange: [0, 20],
     extruded: true,
     transitions: {
-      elevationScale: 3000
+      elevationScale: 10
     }
   });
 

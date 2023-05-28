@@ -1,7 +1,7 @@
 export type EventRecord = {
     id: Id;
-    lat: Latitude;
-    lng: Longitude;
+    latitude: Latitude;
+    longitude: Longitude;
     name: string;
     description: string;
     type: string;

@@ -1,5 +1,6 @@
 import { StateCreator } from 'zustand';
 import { produce } from 'immer';
+import MOCKED_RESPONSE from 'mocked/analysis.json';
 import MOCKED_OPTIONS from 'mocked/options.json';
 import { AnalyzeOptions } from 'types/analyze';
 import { ResultRequest, ResultResponse } from 'types/core';
@@ -28,7 +29,7 @@ const initialState = {
     start_time: '',
     end_time: '',
   },
-  analyzeResponse: null
+  analyzeResponse: MOCKED_RESPONSE
 };
 
 export const createAnalyzeSlice: StateCreator<AnalyzeSlice> = (set, state) => ({
