@@ -5,5 +5,7 @@ export const DEFAULT_MAP_PARAMETERS: MapSettings = {
   latitude:  55.7340269,
   zoom: 14,
   pitch: 30,
-  bearing: -27
+  bearing: -27,
+  maxZoom: 16,
+  minZoom: 12,
 };

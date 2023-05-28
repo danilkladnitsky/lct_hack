@@ -11,6 +11,8 @@ import MapTooltip from '../MapTooltip/MapTooltip';
 
 import { renderLayers } from './MapLayers';
 
+import styles from './Map.module.scss';
+
 function getTooltip({ object }:{object: MapObject}) {
   if (!object) {
     return null;
@@ -21,7 +23,7 @@ function getTooltip({ object }:{object: MapObject}) {
 interface Props {
   viewSettings: MapSettings;
   data: MapData[];
-  onPointClick: (point: MapObject | null) => void;
+  onPointClick?: (point: MapObject | null) => void;
 }
 
 const Map = ({
@@ -32,27 +34,29 @@ const Map = ({
   const tooltipHandler = ({ object }: {object: MapObject}) => {
     if (!object) return null;
 
-    onPointClick(object);
+    onPointClick?.(object);
   };
 
   return (
-    <DeckGL
-      controller={true}
-      initialViewState={viewSettings}
-      layers={renderLayers(data)}
-      onClick={tooltipHandler}
-      onViewStateChange={() => {
-        onPointClick(null);
-      }}
-    >
-      <GlMap
-        reuseMaps
-        mapLib={maplibregl}
-        mapStyle={MAP_STYLE}
-        preventStyleDiffing={true}
-        getTooltip={getTooltip}
-      />
-    </DeckGL>
+    <div className={styles.map}>
+      <DeckGL
+        controller={true}
+        initialViewState={viewSettings}
+        layers={renderLayers(data)}
+        onClick={tooltipHandler}
+        onViewStateChange={() => {
+          onPointClick?.(null);
+        }}
+      >
+        <GlMap
+          reuseMaps
+          mapLib={maplibregl}
+          mapStyle={MAP_STYLE}
+          preventStyleDiffing={true}
+          getTooltip={getTooltip}
+        />
+      </DeckGL>
+    </div>
   );
 };
 

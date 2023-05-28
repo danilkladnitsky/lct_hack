@@ -1,0 +1,15 @@
+.map {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+
+    &>#deckgl-wrapper {
+        height: 100%;
+        width: 100%;
+    }
+
+    .maplibregl-control-container {
+        display: none;
+    }
+}

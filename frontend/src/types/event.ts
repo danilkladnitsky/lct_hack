@@ -4,4 +4,5 @@ export type EventRecord = {
     lng: Longitude;
     name: string;
     description: string;
+    type: string;
 }

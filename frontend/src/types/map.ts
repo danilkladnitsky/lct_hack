@@ -4,6 +4,8 @@ export type MapSettings = {
     zoom: number;
     pitch: number;
     bearing: number;
+    maxZoom: number;
+    minZoom: number;
 }
 
 export type MapData = {

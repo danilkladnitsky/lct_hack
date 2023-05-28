@@ -25,7 +25,7 @@ export function renderLayers(data: MapData[]) {
     data,
     getPosition: (d) => [d.longitude, d.latitude],
     pickable: true,
-    radius: 50,
+    radius: 100,
     material,
     elevationRange: [0, 500],
     elevationScale: 50,

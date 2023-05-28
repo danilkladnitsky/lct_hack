@@ -1,26 +1,43 @@
 import React from 'react';
-import { Flex, } from '@mantine/core';
-import { Stack } from 'tabler-icons-react';
+import { Button, Drawer, ScrollArea, Stack, Title } from '@mantine/core';
 import { MapTooltipObject } from 'types/map';
+
+import useCombinedStore from 'store';
+
+import MapEvent from './MapEvent';
 
 import styles from './MapTooltip.module.scss';
 
 type Props = {
-    points: MapTooltipObject[];
+  points?: MapTooltipObject[];
+  isOpened: boolean;
 }
 
-const MapTooltip = ({ points }: Props) => {
+const MapTooltip = ({ points, isOpened }: Props) => {
+  const setPoint = useCombinedStore(state => state.setPoint);
+
+  const close = () => {
+    setPoint(null);
+  };
+
   return (
-    <div className={styles.tooltip}>
-      <Stack>
-        {points.map(point => {
-          const { source } = point;
-          return <Flex key={point.index}>
-            {source.name}
-          </Flex>;
-        })}
-      </Stack>
-    </div>
+    <Drawer
+      className={styles.tooltip}
+      position="right"
+      onClose={close}
+      opened={isOpened}
+      withCloseButton={false}
+      scrollAreaComponent={ScrollArea.Autosize}
+    >
+      {points && <Stack>
+        <Title order={3}>Инциденты</Title>
+        {points?.map(point => <MapEvent key={point.index}
+          item={point.source} />)
+        }
+        <Button onClick={close}
+          fullWidth>Закрыть</Button>
+      </Stack>}
+    </Drawer>
   );
 };
 
