@@ -12,7 +12,7 @@ class MainModel:
     def get_default(self, cursor):
         inc = cursor.execute("select name from incident_source;")
         i_k = [x for x in inc]
-        return random.sample(i_k, 5)
+        return random.sample(i_k, 2)
 
     def get_prediction_for_unom(self, cursor, unum: int):
         incidents = self.database.get_incedents_for_building(cursor, unum)
