@@ -1,6 +1,8 @@
-from flask import Flask
+from flask import Flask, request
+from convert import convertIncidentsToWork
+from model import MainModel
+import json
 
-from model.app.model import MainModel
 
 app = Flask(__name__)
 
@@ -9,8 +11,23 @@ main_model = MainModel()
 
 @app.route('/model_state', methods=['POST'])
 def model():
-    result = main_model.predict()
-    return {"success": True, "result": result}
+    data = request.get_json()
+    print(data)
+    data = json.loads(data)
+    unom_list = data['unom']
+    included_source = data['source']
+    includet_work_type = data['work_type']
+    start_date =  data['start_date']
+    end_date = data['end_date']
+
+    res_dict = {}
+    for unom in unom_list:
+        incident_list = main_model.predict(unom)
+        res_dict[unom] = convertIncidentsToWork(incident_list, included_source, includet_work_type)
+
+    responce = json.dumps(res_dict)
+    print(responce)
+    return responce
 
 
 if __name__ == '__main__':
