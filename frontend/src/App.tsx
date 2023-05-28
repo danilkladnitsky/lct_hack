@@ -11,14 +11,19 @@ import useGetOptions from 'api/hooks/use-get-options';
 
 import 'dayjs/locale/ru';
 
+import useCombinedStore from 'store';
+
 const App: FC = () => {
+  const { isLogined } = useCombinedStore();
   const { mutate: fetchOptions } = useGetOptions();
   const { mutate: fetchIncidents } = useGetIncidentsCount();
 
   useEffect(() => {
-    fetchOptions();
-    fetchIncidents();
-  }, []);
+    if (isLogined) {
+      fetchOptions();
+      fetchIncidents();
+    }
+  }, [isLogined]);
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
