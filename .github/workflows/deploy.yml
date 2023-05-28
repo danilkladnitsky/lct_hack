@@ -43,11 +43,14 @@ jobs:
     runs-on: self-hosted
     steps:
       -
+        name: Checkout code
+        uses: actions/checkout@v3
+      -
         name: Pull service
-        run: docker compose -f docker-compose.yml pull
+        run: docker compose pull
       -
         name: Build service
-        run: docker compose -f docker-compose.yml up frontend -d --force-recreate
+        run: docker compose up frontend -d --force-recreate
       -
         name: Check service
         run: docker ps -a
