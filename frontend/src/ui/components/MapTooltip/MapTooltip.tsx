@@ -30,7 +30,7 @@ const MapTooltip = ({ points, isOpened }: Props) => {
       scrollAreaComponent={ScrollArea.Autosize}
     >
       {points && <Stack>
-        <Title order={3}>Инциденты</Title>
+        <Title order={3}>Данные по адресу</Title>
         {points?.map(point => <MapEvent key={point.index}
           item={point.source} />)
         }

@@ -21,6 +21,8 @@ export type MapData = {
     longitude: Longitude;
     name: string;
     layer: string;
+    value: string;
+    unom: number;
 }
 
 export type MapObject = {

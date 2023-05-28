@@ -1,5 +1,6 @@
 import { StateCreator } from 'zustand';
 import { produce } from 'immer';
+import MOCKED_RESPONSE from 'mocked/analysis.json';
 import MOCKED_OPTIONS from 'mocked/options.json';
 import { AnalyzeOptions } from 'types/analyze';
 import { ResultRequest, ResultResponse } from 'types/core';
@@ -15,6 +16,7 @@ type AnalyzeActions = {
   setResult: (data: ResultResponse) => void;
   updateRequest: (data: Partial<ResultRequest>) => void;
   setAnalyzeResponse: (data: ResultResponse) => void;
+  pickAddress: (unom: Unom) => void;
 };
 
 export type AnalyzeSlice = AnalyzeState & AnalyzeActions;
@@ -28,7 +30,7 @@ const initialState = {
     start_time: '',
     end_time: '',
   },
-  analyzeResponse: null
+  analyzeResponse: MOCKED_RESPONSE
 };
 
 export const createAnalyzeSlice: StateCreator<AnalyzeSlice> = (set, state) => ({
@@ -53,5 +55,18 @@ export const createAnalyzeSlice: StateCreator<AnalyzeSlice> = (set, state) => ({
   },
   setAnalyzeResponse: (data) => {
     set({ analyzeResponse: data });
+  },
+  pickAddress: (unom) => {
+    const { analyzeRequest } = state();
+    const address = analyzeRequest.address.includes(unom)
+      ? analyzeRequest.address.filter(a => a !== unom)
+      : [...analyzeRequest.address, unom];
+
+    const updatedRequest = {
+      ...analyzeRequest,
+      address
+    };
+
+    set({ analyzeRequest: updatedRequest });
   }
 });
