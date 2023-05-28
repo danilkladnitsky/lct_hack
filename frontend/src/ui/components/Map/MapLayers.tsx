@@ -27,7 +27,8 @@ export function renderLayers(data: MapData[]) {
     pickable: true,
     radius: 100,
     material,
-    elevationRange: [0, 20],
+    elevationRange: [0, 50],
+    elevationScale: 50,
     extruded: true,
     transitions: {
       elevationScale: 10

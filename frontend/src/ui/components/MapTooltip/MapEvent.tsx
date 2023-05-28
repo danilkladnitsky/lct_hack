@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge, Button, Card, Group, Text } from '@mantine/core';
+import { Badge, Button, Card, Group, Stack, Text } from '@mantine/core';
 import { MapData } from 'types/map';
 import convertEventsToMapData from 'utils/convertEventsToMapData';
 
@@ -43,30 +43,33 @@ const MapEvent = ({ item }: Props) => {
           data={eventData}
           viewSettings={{ latitude: item.latitude, longitude: item.longitude, zoom: 14, minZoom: 14, maxZoom: 14 }} />
       </div>
-      <Group position="apart"
+      <Group
+        position="apart"
         mt="md"
         mb="xs">
         <Text weight={500}>{item.name}</Text>
-        <Badge color="pink"
-          variant="light">
+        <Badge
+          color="pink"
+          variant="light"
+          className={styles.badge}
+        >
           {getEventType()}
         </Badge>
+        <Text size="sm"
+          color="dimmed">
+          {item.value}
+        </Text>
+        {canPick && <Button variant="light"
+          color="blue"
+          fullWidth
+          mt="md"
+          radius="md"
+          onClick={() => pickAddress(item.unom)}
+          className={styles.pickBtn}
+        >
+          {wasPicked ? 'Снять выделение' : 'Выбрать для прогноза'}
+        </Button>}
       </Group>
-
-      <Text size="sm"
-        color="dimmed">
-        {item.value}
-      </Text>
-
-      {canPick && <Button variant="light"
-        color="blue"
-        fullWidth
-        mt="md"
-        radius="md"
-        onClick={() => pickAddress(item.unom)}
-      >
-        {wasPicked ? 'Снять выделение' : 'Выбрать для прогноза'}
-      </Button>}
     </Card>
   );
 };

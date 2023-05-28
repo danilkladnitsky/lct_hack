@@ -8,7 +8,7 @@ export const API_ROUTES = {
 
   analyze: {
     options: 'types/choose',
-    result: '/result',
+    result: '/ml_data',
   },
   HISTORY: {
     GET_HISTORY: '/history',

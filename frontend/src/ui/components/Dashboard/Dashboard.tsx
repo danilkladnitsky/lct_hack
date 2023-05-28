@@ -1,7 +1,7 @@
-import React, { useMemo, useState } from 'react';
-import { DEFAULT_MAP_PARAMETERS } from 'constants/map';
+import React, { useEffect, useMemo, } from 'react';
+import useGetOptions from 'api/hooks/use-get-options';
+import convertAddressesToMapData from 'utils/convertAddressesToMapData';
 import convertAnalysisToMapData from 'utils/convertAnalysisToMapData';
-import convertEventsToMapData from 'utils/convertEventsToMapData';
 
 import useCombinedStore from 'store';
 
@@ -13,10 +13,16 @@ import MapTooltip from '../MapTooltip/MapTooltip';
 import styles from './Dashboard.module.scss';
 
 const Dashboard = () => {
-  const { events, mapSettings, setPoint, selectedPoint, analyzeResponse } = useCombinedStore();
+  const { events, mapSettings, setPoint, selectedPoint, analyzeResponse, options } = useCombinedStore();
+
+  const { mutate: fetchOptions } = useGetOptions();
+
+  useEffect(() => {
+    fetchOptions();
+  }, []);
 
   const mapPoints = useMemo(() => ([
-    ...convertEventsToMapData(events),
+    ...convertAddressesToMapData(options?.addresses || []),
     ...convertAnalysisToMapData(analyzeResponse || [])
   ]), [events, analyzeResponse]);
 
