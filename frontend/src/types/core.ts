@@ -1,10 +1,10 @@
 import { SourceType } from './analyze';
 
 export type ResultRequest = {
-  start_time: string;
-  end_time: string;
+  start_date: string;
+  end_date: string;
   work_type: string[];
-  address: Unom[];
+  unom: Unom[];
   source: SourceType[];
 };
 
