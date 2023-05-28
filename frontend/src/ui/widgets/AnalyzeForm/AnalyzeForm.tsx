@@ -29,7 +29,7 @@ const AnalyzeForm = ({ children }: Props) => {
   };
 
   const requestAnalysis = () => {
-    sendAnalyze({ ...analyzeFormData, unom: analyzeFormData.unom.map(v => v.toString()) });
+    sendAnalyze({ ...analyzeFormData, unom: (analyzeFormData?.unom || []).map(v => v.toString()) });
   };
 
   const updateForm = (property: keyof ResultRequest, value: any) => {
