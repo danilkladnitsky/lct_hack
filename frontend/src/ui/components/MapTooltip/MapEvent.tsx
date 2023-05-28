@@ -12,26 +12,34 @@ import styles from './MapEvent.module.scss';
 interface Props {
   item: MapData;
 }
+
+const getEventType = (layer: string) => {
+  switch (layer) {
+  case 'analysis':
+    return 'Прогноз';
+  case 'incident':
+    return 'Инцидент';
+  case 'address':
+  default:
+    return 'Адрес';
+  }
+};
+
 const MapEvent = ({ item }: Props) => {
   const pickAddress = useCombinedStore(state => state.pickAddress);
   const analyzeRequest = useCombinedStore(state => state.analyzeRequest);
+  const incidentsCount = useCombinedStore(state => state.incidentCount);
+
   const eventData = convertEventsToMapData([item]);
 
+  const type = getEventType(item.layer);
   const canPick = item.layer === 'address';
 
   const wasPicked = analyzeRequest.address.includes(item.unom);
 
-  const getEventType = () => {
-    switch (item?.layer) {
-    case 'analysis':
-      return 'Прогноз';
-    case 'incident':
-      return 'Инцидент';
-    case 'address':
-    default:
-      return 'Адрес';
-    }
-  };
+  const incidentsCountValue = incidentsCount.find(c => c.unom === item.unom)?.count;
+
+  const description = item.layer === 'address' ? `Кол-во инцидентов: ${incidentsCountValue || 0}` : item.value;
 
   return (
     <Card shadow="sm"
@@ -47,18 +55,20 @@ const MapEvent = ({ item }: Props) => {
         position="apart"
         mt="md"
         mb="xs">
-        <Text weight={500}>{item.name}</Text>
-        <Badge
-          color="pink"
-          variant="light"
-          className={styles.badge}
-        >
-          {getEventType()}
-        </Badge>
-        <Text size="sm"
-          color="dimmed">
-          {item.value}
-        </Text>
+        <Stack>
+          <Text weight={500}>{item.name}</Text>
+          <Badge
+            color="pink"
+            variant="light"
+            className={styles.badge}
+          >
+            {type}
+          </Badge>
+          <Text size="sm"
+            color="dimmed">
+            {description}
+          </Text>
+        </Stack>
         {canPick && <Button variant="light"
           color="blue"
           fullWidth

@@ -39,3 +39,8 @@ export type MapTooltipObject = {
 export type MapAddress = MapBaseEntity<'address'>;
 
 export type Incident = MapBaseEntity<'incident'>;
+
+export type IncidentCount = {
+    unom: Unom;
+    count: number;
+}
