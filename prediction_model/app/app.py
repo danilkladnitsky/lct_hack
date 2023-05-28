@@ -1,6 +1,6 @@
 from flask import Flask, request
 
-from prediction_model.app.model import MainModel
+from model import MainModel
 
 app = Flask(__name__)
 

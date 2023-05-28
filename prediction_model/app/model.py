@@ -1,7 +1,7 @@
 from typing import List
 
-from prediction_model.app.convert import convert_incidents_to_work
-from prediction_model.app.database import DataBase
+from convert import convert_incidents_to_work
+from database import DataBase
 
 
 class MainModel:
