@@ -16,6 +16,8 @@ const useSendAnalyze = () => {
       onSuccess: (response) => {
         const { data } = response;
         setAnalyzeResponse(data);
+
+        return true;
       },
     },
   );

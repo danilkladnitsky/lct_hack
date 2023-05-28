@@ -28,8 +28,9 @@ const AnalyzeForm = ({ children }: Props) => {
     setAnalyzeFrameVisibility(false);
   };
 
-  const requestAnalysis = () => {
-    sendAnalyze({ ...analyzeFormData, unom: (analyzeFormData?.unom || []).map(v => v.toString()) });
+  const requestAnalysis = async () => {
+    await sendAnalyze({ ...analyzeFormData, unom: (analyzeFormData?.unom || []).map(v => +v) });
+    closeForm();
   };
 
   const updateForm = (property: keyof ResultRequest, value: any) => {
@@ -85,7 +86,7 @@ const AnalyzeForm = ({ children }: Props) => {
           <Text>Выберите адрес</Text>
           <MultiSelect
             value={(analyzeFormData.unom || []).map(v => v.toString())}
-            data={convertToAddressesItems(options?.addresses || [])}
+            data={convertToAddressesItems(options?.addresses || [], analyzeFormData.unom || [])}
             limit={20}
             searchable
             onChange={(v) => updateForm('unom', v)}
