@@ -1,6 +1,4 @@
-import React, { useEffect, useMemo, } from 'react';
-import useGetIncidentsCount from 'api/hooks/use-get-incidents-count';
-import useGetOptions from 'api/hooks/use-get-options';
+import React, { useMemo, } from 'react';
 import convertAddressesToMapData from 'utils/convertAddressesToMapData';
 import convertAnalysisToMapData from 'utils/convertAnalysisToMapData';
 
@@ -15,16 +13,6 @@ import styles from './Dashboard.module.scss';
 
 const Dashboard = () => {
   const { events, mapSettings, setPoint, selectedPoint, analyzeResponse, options, incidentCount } = useCombinedStore();
-
-  const { mutate: fetchOptions } = useGetOptions();
-  const { mutate: fetchIncidents } = useGetIncidentsCount();
-
-  useEffect(() => {
-    fetchOptions();
-    fetchIncidents();
-  }, []);
-
-  console.log(options);
 
   const mapPoints = useMemo(() => ([
     ...convertAddressesToMapData(options?.addresses || [],
