@@ -3,7 +3,7 @@ import sqlite3
 
 class DataBase:
     def __init__(self):
-        self.sqlite_connection = sqlite3.connect('../LCT_Data')
+        self.sqlite_connection = self.get_connection()
         self.cursor = self.sqlite_connection.cursor()
         print("База данных создана и успешно подключена к SQLite")
 
@@ -16,16 +16,23 @@ class DataBase:
         self.cursor.execute(sqlite_select_query)
         records = self.cursor.fetchall()
         print(f"Build contains: {len(records)}")
-        # self. cursor.close()
+        self.cursor.close()
 
-    def get_build_by_unom(self, unom: int):
+    def get_build_by_unom(self, cursor, unom: int):
         sqlite_select_query = f"select * from build where unom={unom};"
-        self.cursor.execute(sqlite_select_query)
-        record = self.cursor.fetchall()
+        cursor.execute(sqlite_select_query)
+        record = cursor.fetchall()
         return record
 
-    def get_incedents_for_building(self, unom: int):
+    def get_incedents_for_building(self, cursor, unom: int):
         sqlite_select_query = f"select * from incidents where unom={unom};"
-        self.cursor.execute(sqlite_select_query)
-        record = self.cursor.fetchall()
+        cursor.execute(sqlite_select_query)
+        record = cursor.fetchall()
         return record
+
+    def get_cursor(self):
+        self.sqlite_connection = self.get_connection()
+        return self.sqlite_connection.cursor()
+
+    def get_connection(self):
+        return sqlite3.connect('../LCT_Data.db')

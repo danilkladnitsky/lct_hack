@@ -1,6 +1,4 @@
 from typing import List
-import pandas as pd
-import sqlite3
 
 from prediction_model.app.convert import convertIncidentsToWork
 from prediction_model.app.database import DataBase
@@ -10,20 +8,25 @@ class MainModel:
     def __init__(self):
         self.database = DataBase()
 
-    def get_prediction_for_unom(self, unum: int):
-        incedents = self.database.get_incedents_for_building(unum)
+    def get_prediction_for_unom(self, cursor, unum: int):
+        incedents = self.database.get_incedents_for_building(cursor, unum)
         return {"incedents": incedents}
 
-    def predict(self, unoms: List[int], included_source, includet_work_type):
-        return [convertIncidentsToWork(self.get_prediction_for_unom(x), included_source, includet_work_type) for x in
-                unoms]
+    def predict_works(self, unoms: List[int], included_source, includet_work_type):
+        results = []
+        cursor = self.database.get_cursor()
+        for unum in unoms:
+            prediction = self.get_prediction_for_unom(cursor, unum)
+            converted2work = convertIncidentsToWork(cursor, prediction, included_source, includet_work_type)
+            results.append(converted2work)
+        cursor.close()
+        return results
 
-    def predict_old(self, unom):
-        conn = sqlite3.connect('LCT_Data')
-        cursor = conn.cursor()
-        query = f"SELECT DISTINCT name FROM incidents WHERE unom = {unom} LIMIT 2;"
-        cursor.execute(query)
-        results = cursor.fetchall()
-        incidents = pd.DataFrame(results)[0].values
-
-        return incidents
+    def predict_incedents(self, unoms: List[int]):
+        results = []
+        cursor = self.database.get_cursor()
+        for unum in unoms:
+            prediction = self.get_prediction_for_unom(cursor, unum)
+            results.append(prediction)
+        cursor.close()
+        return results
