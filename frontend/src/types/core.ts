@@ -9,8 +9,8 @@ export type ResultRequest = {
 };
 
 export type ResultResponse = {
-  work: string[];
-  unom: number[];
+  work_type: string[];
+  unom: number;
   latitude: Latitude;
   longitude: Longitude;
   address: string;

@@ -8,7 +8,7 @@ const convertAnalysisToMapData = (analysis: ResultResponse): MapData[] => {
     longitude: +a.longitude,
     layer: 'analysis',
     name: a.address,
-    value: (a.work || []).join(', '),
+    value: (a.work_type || []).join(', '),
     unom: a.unom
   }));
 };

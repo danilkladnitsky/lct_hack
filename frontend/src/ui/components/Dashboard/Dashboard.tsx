@@ -14,7 +14,16 @@ import MapTooltip from '../MapTooltip/MapTooltip';
 import styles from './Dashboard.module.scss';
 
 const Dashboard = () => {
-  const { mapSettings, heatboxVisible, setPoint, selectedPoint, analyzeResponse, options, incidentCount, isLogined } = useCombinedStore();
+  const {
+    mapSettings,
+    heatboxVisible,
+    setPoint,
+    selectedPoint,
+    analyzeResponse,
+    options,
+    incidentCount,
+    isLogined
+  } = useCombinedStore();
 
   const { mutate: fetchOptions } = useGetOptions();
   const { mutate: fetchIncidents } = useGetIncidentsCount();
