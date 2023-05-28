@@ -1,6 +1,6 @@
-import { StateCreator } from "zustand";
-import { produce } from "immer";
-import { GetOptionsResponse, ResultRequest, ResultResponse } from "types/core";
+import { StateCreator } from 'zustand';
+import { produce } from 'immer';
+import { GetOptionsResponse, ResultRequest, ResultResponse } from 'types/core';
 
 type AnalyzeState = {
   options: GetOptionsResponse | null;
@@ -24,8 +24,8 @@ const initialState = {
     unom: [],
     longitude: [],
     latitude: [],
-    start_time: "",
-    end_time: "",
+    start_time: '',
+    end_time: '',
   },
   result: null,
 };

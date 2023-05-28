@@ -8,9 +8,10 @@ import Map from '../Map/Map';
 import styles from './MapEvent.module.scss';
 
 interface Props {
-    item: EventRecord;
+  item: EventRecord;
+  canPick?: boolean;
 }
-const MapEvent = ({ item }: Props) => {
+const MapEvent = ({ item, canPick }: Props) => {
   const eventData = convertEventsToMapData([item]);
   return (
     <Card shadow="sm"
@@ -37,13 +38,13 @@ const MapEvent = ({ item }: Props) => {
         {item.description}
       </Text>
 
-      <Button variant="light"
+      {canPick && <Button variant="light"
         color="blue"
         fullWidth
         mt="md"
         radius="md">
         Выбрать для прогноза
-      </Button>
+      </Button>}
     </Card>
   );
 };
