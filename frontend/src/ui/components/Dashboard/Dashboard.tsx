@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { DEFAULT_MAP_PARAMETERS } from 'constants/map';
+import convertEventsToMapData from 'utils/convertEventsToMapData';
 
 import useCombinedStore from 'store';
 
@@ -10,11 +11,15 @@ import MapLayers from '../MapLayers/MapLayers';
 import styles from './Dashboard.module.scss';
 
 const Dashboard = () => {
-  const mapSettings = useCombinedStore(state => state.mapSettings);
+  const { events, mapSettings, setPoint } = useCombinedStore();
 
   return (
     <div className={styles.dashboard}>
-      <Map viewSettings={mapSettings} />
+      <Map
+        viewSettings={mapSettings}
+        data={convertEventsToMapData(events)}
+        onPointClick={setPoint}
+      />
       <MapLayers />
       <MapFooter />
 
