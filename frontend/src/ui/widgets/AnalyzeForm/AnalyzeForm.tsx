@@ -34,23 +34,23 @@ const AnalyzeForm = ({ children }: Props) => {
 
   const updateForm = (property: keyof ResultRequest, value: any) => {
     switch (property) {
-    case 'start_time':
-      return updateRequest({ start_time: value });
-    case 'end_time':
-      return updateRequest({ end_time: value });
+    case 'start_date':
+      return updateRequest({ start_date: value });
+    case 'end_date':
+      return updateRequest({ end_date: value });
     case 'source':
       return updateRequest({ source: value });
     case 'work_type':
       return updateRequest({ work_type: value });
-    case 'address':
+    case 'unom':
     default:
-      return updateRequest({ address: value });
+      return updateRequest({ unom: value });
     }
   };
 
   const saveDateRange = ([start, end]: DatesRangeValue) => {
-    updateForm('start_time', start);
-    updateForm('end_time', end);
+    updateForm('start_date', start);
+    updateForm('end_date', end);
   };
 
   return (
@@ -84,11 +84,11 @@ const AnalyzeForm = ({ children }: Props) => {
           />
           <Text>Выберите адрес</Text>
           <MultiSelect
-            value={analyzeFormData.address.map(a => a.toString())}
+            value={analyzeFormData.unom.map(a => a.toString())}
             data={convertToAddressesItems(options?.addresses || [])}
             limit={20}
             searchable
-            onChange={(v) => updateForm('address', v)}
+            onChange={(v) => updateForm('unom', v)}
           />
           <Text>Выберите временной диапазон</Text>
           <DatePickerInput

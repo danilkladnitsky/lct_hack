@@ -22,7 +22,7 @@ type AnalyzeActions = {
 export type AnalyzeSlice = AnalyzeState & AnalyzeActions;
 
 const initialState = {
-  options: MOCKED_OPTIONS as unknown as AnalyzeOptions,
+  options: null,
   analyzeRequest: {
     source: [],
     work_type: [],
@@ -30,7 +30,7 @@ const initialState = {
     start_time: '',
     end_time: '',
   },
-  analyzeResponse: MOCKED_RESPONSE
+  analyzeResponse: null
 };
 
 export const createAnalyzeSlice: StateCreator<AnalyzeSlice> = (set, state) => ({
