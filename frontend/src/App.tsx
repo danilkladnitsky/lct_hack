@@ -6,7 +6,10 @@ import Router from 'router';
 
 const queryClient = new QueryClient();
 
+import 'dayjs/locale/ru';
+
 const App: FC = () => {
+
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>

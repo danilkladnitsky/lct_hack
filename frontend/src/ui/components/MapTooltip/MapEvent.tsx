@@ -1,17 +1,46 @@
 import React from 'react';
-import { Badge, Button, Card, Group, Text } from '@mantine/core';
-import { EventRecord } from 'types/event';
+import { Badge, Button, Card, Group, Stack, Text } from '@mantine/core';
+import { MapData } from 'types/map';
 import convertEventsToMapData from 'utils/convertEventsToMapData';
+
+import useCombinedStore from 'store';
 
 import Map from '../Map/Map';
 
 import styles from './MapEvent.module.scss';
 
 interface Props {
-    item: EventRecord;
+  item: MapData;
 }
+
+const getEventType = (layer: string) => {
+  switch (layer) {
+  case 'analysis':
+    return 'Прогноз';
+  case 'incident':
+    return 'Инцидент';
+  case 'address':
+  default:
+    return 'Адрес';
+  }
+};
+
 const MapEvent = ({ item }: Props) => {
+  const pickAddress = useCombinedStore(state => state.pickAddress);
+  const analyzeRequest = useCombinedStore(state => state.analyzeRequest);
+  const incidentsCount = useCombinedStore(state => state.incidentCount);
+
   const eventData = convertEventsToMapData([item]);
+
+  const type = getEventType(item.layer);
+  const canPick = item.layer === 'address';
+
+  const wasPicked = analyzeRequest.address.includes(item.unom);
+
+  const incidentsCountValue = incidentsCount.find(c => c.unom === item.unom)?.count;
+
+  const description = item.layer === 'address' ? `Кол-во инцидентов: ${incidentsCountValue || 0}` : item.value;
+
   return (
     <Card shadow="sm"
       padding="lg"
@@ -20,30 +49,38 @@ const MapEvent = ({ item }: Props) => {
       <div className={styles.mapPreview}>
         <Map
           data={eventData}
-          viewSettings={{ latitude: item.lat, longitude: item.lng, zoom: 14, minZoom: 14, maxZoom: 14 }} />
+          showHeatMap={false}
+          viewSettings={{ latitude: item.latitude, longitude: item.longitude, zoom: 14, minZoom: 14, maxZoom: 14 }} />
       </div>
-      <Group position="apart"
+      <Group
+        position="apart"
         mt="md"
         mb="xs">
-        <Text weight={500}>{item.name}</Text>
-        <Badge color="pink"
-          variant="light">
-          {item.type}
-        </Badge>
+        <Stack>
+          <Text weight={500}>{item.name}</Text>
+          <Badge
+            color="pink"
+            variant="light"
+            className={styles.badge}
+          >
+            {type}
+          </Badge>
+          <Text size="sm"
+            color="dimmed">
+            {description}
+          </Text>
+        </Stack>
+        {canPick && <Button variant="light"
+          color="blue"
+          fullWidth
+          mt="md"
+          radius="md"
+          onClick={() => pickAddress(item.unom)}
+          className={styles.pickBtn}
+        >
+          {wasPicked ? 'Снять выделение' : 'Выбрать для прогноза'}
+        </Button>}
       </Group>
-
-      <Text size="sm"
-        color="dimmed">
-        {item.description}
-      </Text>
-
-      <Button variant="light"
-        color="blue"
-        fullWidth
-        mt="md"
-        radius="md">
-        Выбрать для прогноза
-      </Button>
     </Card>
   );
 };

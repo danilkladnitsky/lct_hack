@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { AuthService } from 'api';
-import { Dashboard, History, SignIn, SignUp } from 'pages';
+import { DashboardPage, History, SignIn, SignUp } from 'pages';
 
 import useCombinedStore from 'store';
 
@@ -31,7 +31,7 @@ const Router = () => {
           <>
             <Route
               path={PATHS.dashboard}
-              element={Dashboard}
+              element={DashboardPage}
             />
             <Route
               path={PATHS.history}
