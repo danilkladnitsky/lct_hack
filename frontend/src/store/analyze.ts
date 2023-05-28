@@ -22,7 +22,7 @@ type AnalyzeActions = {
 export type AnalyzeSlice = AnalyzeState & AnalyzeActions;
 
 const initialState = {
-  options: {},
+  options: MOCKED_OPTIONS,
   analyzeRequest: {
     source: [],
     work_type: [],

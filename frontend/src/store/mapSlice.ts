@@ -11,6 +11,7 @@ type State = {
   selectedPoint: MapObject | null;
   incidents: Incident[];
   incidentCount: IncidentCount[];
+  heatboxVisible: boolean;
 }
 
 type Actions = {
@@ -19,6 +20,7 @@ type Actions = {
   setAddresses: (addresses: MapAddress[]) => void;
   setIncidents: (incidents: Incident[]) => void;
   setIncidentsCount: (incidents: IncidentCount[]) => void;
+  toggleHeatBox: () => void;
 }
 
 export type MapSlice = State & Actions;
@@ -29,10 +31,11 @@ const initialState: State = {
   selectedPoint: null,
   addresses: [],
   incidents: [],
-  incidentCount: []
+  incidentCount: [],
+  heatboxVisible: true
 };
 
-export const createMapSlice: StateCreator<MapSlice> = (set) => ({
+export const createMapSlice: StateCreator<MapSlice> = (set, state) => ({
   ...initialState,
   setEvents: (events) => {
     set({ events });
@@ -48,5 +51,8 @@ export const createMapSlice: StateCreator<MapSlice> = (set) => ({
   },
   setIncidentsCount: (count) => {
     set({ incidentCount: count });
+  },
+  toggleHeatBox: () => {
+    set({ heatboxVisible: !state().heatboxVisible });
   }
 });
