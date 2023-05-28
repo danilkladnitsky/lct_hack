@@ -1,4 +1,4 @@
-name: Buld Docker images
+name: Deploy application
 
 on:
   push:
@@ -36,3 +36,18 @@ jobs:
           cache-from: type=registry,ref=${{env.frontend_rep}}:latest
           cache-to: type=inline
           platforms: linux/x86_64
+  
+  build-frontend:
+    needs: push-to-registry
+    name: Build and publish frontend
+    runs-on: self-hosted
+    steps:
+      -
+        name: Pull service
+        run: docker compose pull
+      -
+        name: Build service
+        run: docker compose up frontend -d --force-recreate
+      -
+        name: Check service
+        run: docker ps -a
