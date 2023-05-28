@@ -1,22 +1,25 @@
 import { StateCreator } from 'zustand';
 import { produce } from 'immer';
-import { GetOptionsResponse, ResultRequest, ResultResponse } from 'types/core';
+import MOCKED_OPTIONS from 'mocked/options.json';
+import { AnalyzeOptions } from 'types/analyze';
+import { ResultRequest, ResultResponse } from 'types/core';
 
 type AnalyzeState = {
-  options: GetOptionsResponse | null;
+  options: AnalyzeOptions | null;
   analyzeRequest: ResultRequest;
   result: ResultResponse | null;
 };
 
 type AnalyzeActions = {
-  setOptions: (data: GetOptionsResponse) => void;
+  setOptions: (data: AnalyzeOptions) => void;
   setResult: (data: ResultResponse) => void;
+  updateRequest: (data: Partial<ResultRequest>) => void;
 };
 
 export type AnalyzeSlice = AnalyzeState & AnalyzeActions;
 
 const initialState = {
-  options: null,
+  options: MOCKED_OPTIONS as unknown as AnalyzeOptions,
   analyzeRequest: {
     source: [],
     work_type: [],
@@ -30,7 +33,7 @@ const initialState = {
   result: null,
 };
 
-export const createAnalyzeSlice: StateCreator<AnalyzeSlice> = (set) => ({
+export const createAnalyzeSlice: StateCreator<AnalyzeSlice> = (set, state) => ({
   ...initialState,
   setOptions: (data) =>
     set(
@@ -44,4 +47,11 @@ export const createAnalyzeSlice: StateCreator<AnalyzeSlice> = (set) => ({
         state.result = data;
       })
     ),
+  updateRequest: (data) => {
+    const { analyzeRequest } = state();
+    const updated = { ...analyzeRequest, ...data };
+
+    set({ analyzeRequest: updated });
+
+  }
 });
