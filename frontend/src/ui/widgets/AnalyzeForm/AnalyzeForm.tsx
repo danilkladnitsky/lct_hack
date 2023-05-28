@@ -1,6 +1,7 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { Button, Drawer, MultiSelect, Stack, Text } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
+import useGetOptions from 'api/hooks/use-get-options';
 import { Analyze, } from 'tabler-icons-react';
 import Title from 'ui/shared/Title/Title';
 import convertToSelectItems from 'utils/convertToSelectItems';
@@ -17,11 +18,16 @@ type Props = {
 
 const AnalyzeForm = ({ children }: Props) => {
   const analyzeFormData = useCombinedStore(state => state.analyzeRequest);
+  const { mutate: fetchOptions } = useGetOptions();
   const { analyzeFrameVisible, setAnalyzeFrameVisibility } = useCombinedStore();
 
   const closeForm = () => {
     setAnalyzeFrameVisibility(false);
   };
+
+  useEffect(() => {
+    fetchOptions();
+  }, []);
 
   return (
     <Drawer
