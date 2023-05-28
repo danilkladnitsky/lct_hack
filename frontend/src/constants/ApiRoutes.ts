@@ -11,7 +11,7 @@ export const API_ROUTES = {
     result: 'ml_data',
   },
   HISTORY: {
-    GET_HISTORY: '/history',
+    GET_HISTORY: 'history',
   },
   INCIDENTS: {
     COUNT: 'incident_count'

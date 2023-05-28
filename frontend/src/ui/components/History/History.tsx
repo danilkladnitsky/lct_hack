@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Loader, Pagination } from '@mantine/core';
-import useGetHistory from 'api/hooks/use-get-options';
+import useGetHistory from 'api/hooks/use-get-history';
 import Title from 'ui/shared/Title/Title';
 
 import useCombinedStore from 'store';
