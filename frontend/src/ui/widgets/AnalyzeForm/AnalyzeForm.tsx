@@ -84,7 +84,7 @@ const AnalyzeForm = ({ children }: Props) => {
           />
           <Text>Выберите адрес</Text>
           <MultiSelect
-            value={analyzeFormData.unom.map(a => a.toString())}
+            value={analyzeFormData.unom?.map(a => a.toString())}
             data={convertToAddressesItems(options?.addresses || [])}
             limit={20}
             searchable
