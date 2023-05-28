@@ -64,7 +64,7 @@ type (
 	}
 
 	MLUseCase interface {
-		CreateRequestForML(ctx context.Context, login string, ml *models.MLData) error
+		CreateRequestForML(ctx context.Context, login string, ml *models.MLData) (*models.HistoryItem, error)
 	}
 
 	HistoryUseCase interface {

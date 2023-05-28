@@ -36,6 +36,6 @@ func NewRouter(r chi.Router, key string,
 	newAuthRoutes(r, tokenAuth, us)
 	newFormTypesRoutes(r, ch)
 	newIncidentRoutes(r, is)
-	newMLRoutes(r, ml)
+	newMLRoutes(r, ml, &authRoutes{TokenAuth: tokenAuth})
 	newHistoryRoutes(r, hs, &authRoutes{TokenAuth: tokenAuth})
 }

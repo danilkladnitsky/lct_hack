@@ -3,6 +3,7 @@ package rest
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/jwtauth"
 	"github.com/go-chi/render"
@@ -31,6 +32,7 @@ func (h *historyRoutes) getHistoryByLogin(w http.ResponseWriter, r *http.Request
 		return
 	}
 	hs, err := h.hs.GetHistoryByLogin(r.Context(), str)
+	fmt.Println(err)
 	if err != nil {
 		render.Render(w, r, ErrRender(errors.New("error in format")))
 		return

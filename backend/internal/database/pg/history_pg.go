@@ -20,10 +20,10 @@ func NewHistoryRepo(db *gorm.DB) *HistoryRepo {
 
 func (h *HistoryRepo) GetHistoryByLoginRp(ctx context.Context, login string) ([]*models.History, error) {
 	var hist []*models.History
-	if err := h.db.WithContext(ctx).Select("histories").Where("login = ?", login).Find(&hist).Error; err != nil {
+	if err := h.db.WithContext(ctx).Table("histories").Select("created_at, request, response").Where("login = ?", login).Scan(&hist).Error; err != nil {
 		return nil, err
 	}
-	return nil, nil
+	return hist, nil
 }
 
 func (h *HistoryRepo) StoreHistoryRp(ctx context.Context, history *models.History) error {

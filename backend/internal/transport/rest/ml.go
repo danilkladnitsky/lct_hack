@@ -13,10 +13,11 @@ import (
 
 type mlRoutes struct {
 	ml services.MLUseCase
+	a  *authRoutes
 }
 
-func newMLRoutes(r chi.Router, ml services.MLUseCase) {
-	mlRt := &mlRoutes{ml: ml}
+func newMLRoutes(r chi.Router, ml services.MLUseCase, a *authRoutes) {
+	mlRt := &mlRoutes{ml: ml, a: a}
 	r.Group(func(r chi.Router) {
 		r.Use(jwtauth.Authenticator)
 		r.Post("/ml_data", mlRt.getMlData)
@@ -34,8 +35,13 @@ func (m *mlRoutes) getMlData(w http.ResponseWriter, r *http.Request) {
 		render.Render(w, r, ErrRender(errors.New("bad data format")))
 		return
 	}
-	err = m.ml.CreateRequestForML(r.Context(), "", &mlData)
+	str, err := m.a.getClaims(r)
+	if err != nil {
+		render.Render(w, r, ErrRender(errors.New("error in format")))
+		return
+	}
+	hist, err := m.ml.CreateRequestForML(r.Context(), str, &mlData)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(err)
+	json.NewEncoder(w).Encode(hist)
 }

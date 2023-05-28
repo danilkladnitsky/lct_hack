@@ -28,7 +28,7 @@ func (a *AddressCoordRepo) GetAllAddressCoordinates(ctx context.Context) ([]*mod
 
 func (a *AddressCoordRepo) GetAddressInfoByUnom(ctx context.Context, unom int64) (*models.AddressCoord, error) {
 	var addr *models.AddressCoord
-	if err := a.db.WithContext(ctx).Table("address_coord").Select("address, longitude, latitude").Where("address_coord.unom = ?", unom).Find(addr).Error; err != nil {
+	if err := a.db.WithContext(ctx).Table("address_coord").Select("address, longitude, latitude").Where("address_coord.unom = ?", unom).Find(&addr).Error; err != nil {
 		return nil, err
 	}
 	return addr, nil
