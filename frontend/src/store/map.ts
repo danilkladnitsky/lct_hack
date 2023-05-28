@@ -1,14 +1,11 @@
 import { StateCreator } from 'zustand';
 import { DEFAULT_MAP_PARAMETERS } from 'constants/map';
 import { EventRecord } from 'types/event';
+import { MapSettings } from 'types/map';
 
 type State = {
   events: EventRecord[];
-  mapSettings: {
-    lng: Longitude;
-    lat: Latitude;
-    zoom: number;
-  }
+  mapSettings: MapSettings;
 }
 
 type Actions = {

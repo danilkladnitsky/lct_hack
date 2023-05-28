@@ -1,5 +1,5 @@
 export type MapSettings = {
-    lat: Latitude;
-    lng: Longitude;
+    latitude: Latitude;
+    longitude: Longitude;
     zoom: number;
 }

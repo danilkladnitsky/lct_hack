@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Map as GlMap } from 'react-map-gl';
 import { MAP_STYLE } from 'const/map';
 import { DEFAULT_MAP_PARAMETERS } from 'constants/map';
@@ -22,6 +22,7 @@ const Map = ({
         reuseMaps
         mapLib={maplibregl}
         mapStyle={MAP_STYLE}
+        preventStyleDiffing
       />
     </DeckGL>
   );

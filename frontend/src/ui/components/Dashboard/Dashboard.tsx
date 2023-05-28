@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
+import { DEFAULT_MAP_PARAMETERS } from 'constants/map';
 
 import useCombinedStore from 'store';
 
