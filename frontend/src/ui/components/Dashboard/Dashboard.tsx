@@ -1,15 +1,19 @@
-import React from "react";
+import React from 'react';
 
-import Map from "../Map/Map";
-import MapFooter from "../MapFooter/MapFooter";
-import MapLayers from "../MapLayers/MapLayers";
+import useCombinedStore from 'store';
 
-import styles from "./Dashboard.module.scss";
+import Map from '../Map/Map';
+import MapFooter from '../MapFooter/MapFooter';
+import MapLayers from '../MapLayers/MapLayers';
+
+import styles from './Dashboard.module.scss';
 
 const Dashboard = () => {
+  const mapSettings = useCombinedStore(state => state.mapSettings);
+
   return (
     <div className={styles.dashboard}>
-      <Map />
+      <Map viewSettings={mapSettings} />
       <MapLayers />
       <MapFooter />
 

@@ -1,17 +1,19 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
-import { AnalyzeSlice, createAnalyzeSlice } from "./analyze";
-import { AuthSlice, createAuthSlice } from "./auth";
-import { createHistorySlice, HistorySlice } from "./history";
-import { createUiSlice, UiSlice } from "./uiSlice";
+import { AnalyzeSlice, createAnalyzeSlice } from './analyze';
+import { AuthSlice, createAuthSlice } from './auth';
+import { createHistorySlice, HistorySlice } from './history';
+import { createMapSlice, MapSlice } from './map';
+import { createUiSlice, UiSlice } from './uiSlice';
 
-type Store = AuthSlice & HistorySlice & AnalyzeSlice & UiSlice;
+type Store = AuthSlice & HistorySlice & AnalyzeSlice & UiSlice & MapSlice;
 
 const useCombinedStore = create<Store>()((...a) => ({
   ...createAuthSlice(...a),
   ...createHistorySlice(...a),
   ...createAnalyzeSlice(...a),
-  ...createUiSlice(...a)
+  ...createUiSlice(...a),
+  ...createMapSlice(...a)
 
 }));
 

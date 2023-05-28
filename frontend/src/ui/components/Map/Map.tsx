@@ -1,44 +1,27 @@
-import React, { useState } from "react";
-import { Map as GlMap } from "react-map-gl";
-import { DEFAULT_MAP_PARAMETERS } from "constants/map";
-import DeckGL from "deck.gl";
-import maplibregl from "maplibre-gl";
-
-import { renderLayers } from "./MapLayers";
-
-import styles from "./Map.module.scss";
-
-const MAP_STYLE = "https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json";
+import React from 'react';
+import { Map as GlMap } from 'react-map-gl';
+import { MAP_STYLE } from 'const/map';
+import { DEFAULT_MAP_PARAMETERS } from 'constants/map';
+import DeckGL from 'deck.gl';
+import maplibregl from 'maplibre-gl';
+import { MapSettings } from 'types/map';
 
 interface Props {
-  lng: number;
-  lat: number;
-  zoom: number;
+  viewSettings: MapSettings;
 }
 
 const Map = ({
-  lat = DEFAULT_MAP_PARAMETERS.lat,
-  lng = DEFAULT_MAP_PARAMETERS.lng,
-  zoom = DEFAULT_MAP_PARAMETERS.zoom
+  viewSettings = DEFAULT_MAP_PARAMETERS
 }: Props) => {
-  const [viewState] = useState({
-    longitude: lat,
-    latitude: lng,
-    zoom: zoom,
-    maxZoom: 16
-  });
-
   return (
     <DeckGL
-      layers={renderLayers()}
       controller={true}
-      initialViewState={viewState}
+      initialViewState={viewSettings}
     >
       <GlMap
         reuseMaps
         mapLib={maplibregl}
         mapStyle={MAP_STYLE}
-        preventStyleDiffing={true}
       />
     </DeckGL>
   );
