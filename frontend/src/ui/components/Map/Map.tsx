@@ -1,46 +1,62 @@
-import React, { useState } from "react";
-import { Map as GlMap } from "react-map-gl";
-import { DEFAULT_MAP_PARAMETERS } from "constants/map";
-import DeckGL from "deck.gl";
-import maplibregl from "maplibre-gl";
+import React from 'react';
+import * as ReactDOMServer from 'react-dom/server';
+import { Map as GlMap } from 'react-map-gl';
+import { MAP_STYLE } from 'const/map';
+import { DEFAULT_MAP_PARAMETERS } from 'constants/map';
+import DeckGL from 'deck.gl';
+import maplibregl from 'maplibre-gl';
+import { MapData, MapObject, MapSettings } from 'types/map';
 
-import { renderLayers } from "./MapLayers";
+import MapTooltip from '../MapTooltip/MapTooltip';
 
-import styles from "./Map.module.scss";
+import { renderLayers } from './MapLayers';
 
-const MAP_STYLE = "https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json";
+import styles from './Map.module.scss';
 
+function getTooltip({ object }:{object: MapObject}) {
+  if (!object) {
+    return null;
+  }
+
+  return ReactDOMServer.renderToString(<MapTooltip points={object.points} />);
+}
 interface Props {
-  lng: number;
-  lat: number;
-  zoom: number;
+  viewSettings: MapSettings;
+  data: MapData[];
+  onPointClick?: (point: MapObject | null) => void;
 }
 
 const Map = ({
-  lat = DEFAULT_MAP_PARAMETERS.lat,
-  lng = DEFAULT_MAP_PARAMETERS.lng,
-  zoom = DEFAULT_MAP_PARAMETERS.zoom
+  viewSettings = DEFAULT_MAP_PARAMETERS,
+  data,
+  onPointClick
 }: Props) => {
-  const [viewState] = useState({
-    longitude: lat,
-    latitude: lng,
-    zoom: zoom,
-    maxZoom: 16
-  });
+  const tooltipHandler = ({ object }: {object: MapObject}) => {
+    if (!object) return null;
+
+    onPointClick?.(object);
+  };
 
   return (
-    <DeckGL
-      layers={renderLayers()}
-      controller={true}
-      initialViewState={viewState}
-    >
-      <GlMap
-        reuseMaps
-        mapLib={maplibregl}
-        mapStyle={MAP_STYLE}
-        preventStyleDiffing={true}
-      />
-    </DeckGL>
+    <div className={styles.map}>
+      <DeckGL
+        controller={true}
+        initialViewState={viewSettings}
+        layers={renderLayers(data)}
+        onClick={tooltipHandler}
+        onViewStateChange={() => {
+          onPointClick?.(null);
+        }}
+      >
+        <GlMap
+          reuseMaps
+          mapLib={maplibregl}
+          mapStyle={MAP_STYLE}
+          preventStyleDiffing={true}
+          getTooltip={getTooltip}
+        />
+      </DeckGL>
+    </div>
   );
 };
 
