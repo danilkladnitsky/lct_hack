@@ -24,6 +24,8 @@ const Dashboard = () => {
     fetchIncidents();
   }, []);
 
+  console.log(options);
+
   const mapPoints = useMemo(() => ([
     ...convertAddressesToMapData(options?.addresses || [],
       (u) => incidentCount.find(i => i.unom === u)?.count || 0),

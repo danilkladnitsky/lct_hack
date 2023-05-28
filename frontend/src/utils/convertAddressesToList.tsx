@@ -5,7 +5,7 @@ const convertToAddressesItems = (data: MapAddress[], selectedItems?: string[]): 
   return data.map(item => {
     const selected = !!(selectedItems || []).includes(item.unom);
 
-    return { value: item.unom.toString(), label: item.address, selected };
+    return { value: item.unom, label: item.address, selected };
   });
 };
 
