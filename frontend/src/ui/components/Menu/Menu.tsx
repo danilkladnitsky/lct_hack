@@ -1,10 +1,13 @@
-import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { PATHS } from "constants/RouterPaths";
-import { Analyze, History, Logout,Map } from "tabler-icons-react";
-import ActionButton from "ui/shared/ActionButton/ActionButton";
+import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { AuthService } from 'api';
+import { PATHS } from 'constants/RouterPaths';
+import { Analyze, History, Logout, Map } from 'tabler-icons-react';
+import ActionButton from 'ui/shared/ActionButton/ActionButton';
 
-import styles from "./Menu.module.scss";
+import useCombinedStore from 'store';
+
+import styles from './Menu.module.scss';
 
 const NAV_SCHEMA = [
   {
@@ -15,18 +18,25 @@ const NAV_SCHEMA = [
     Icon: History,
     route: PATHS.history,
   },
-  {
-    Icon: Logout,
-    route: PATHS.signIn,
-  },
 ];
 
 const Menu = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
+  const { logout } = useCombinedStore();
+
   const handleRedirect = (link: string) => {
     navigate(link);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await AuthService.logout();
+      logout();
+    } catch (e) {
+      console.debug(e);
+    }
   };
 
   return (
@@ -42,6 +52,12 @@ const Menu = () => {
         </ActionButton>,
       )
       }
+      <ActionButton
+        onClick={handleLogout}
+        className={styles.menuBtn}
+      >
+        <Logout />
+      </ActionButton>
     </div>
   );
 };

@@ -1,13 +1,13 @@
-import React, { ReactNode } from "react";
-import { Button, Drawer, MultiSelect, Stack, Text } from "@mantine/core";
-import { DatePickerInput } from "@mantine/dates";
-import { Analyze, } from "tabler-icons-react";
-import Title from "ui/shared/Title/Title";
-import convertToSelectItems from "utils/convertToSelectItems";
+import React, { ReactNode } from 'react';
+import { Button, Drawer, MultiSelect, Stack, Text } from '@mantine/core';
+import { DatePickerInput } from '@mantine/dates';
+import { Analyze, } from 'tabler-icons-react';
+import Title from 'ui/shared/Title/Title';
+import convertToSelectItems from 'utils/convertToSelectItems';
 
-import useCombinedStore from "store";
+import useCombinedStore from 'store';
 
-import styles from "./AnalyzeForm.module.scss";
+import styles from './AnalyzeForm.module.scss';
 
 const DEFAULT_PROPS = { opacity: 0.5, blur: 4 };
 
@@ -32,7 +32,7 @@ const AnalyzeForm = ({ children }: Props) => {
       withCloseButton={false}
       classNames={{ body: styles.drawer }}
     >
-      <Stack spacing={"md"}
+      <Stack spacing={'md'}
         className={styles.form}>
         <Stack>
           <Title order={3}>Прогноз</Title>
@@ -61,7 +61,7 @@ const AnalyzeForm = ({ children }: Props) => {
           <Button
             fullWidth
             onClick={closeForm}
-            color={"red"}
+            color={'red'}
           >
             Закрыть
           </Button>

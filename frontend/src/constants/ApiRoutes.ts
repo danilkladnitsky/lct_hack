@@ -1,14 +1,14 @@
 export const API_ROUTES = {
   auth: {
-    login: "/auth/login",
-    logout: "/auth/logout",
-    register: "/auth/register",
-    info: "/auth/info",
+    login: '/login',
+    logout: '/logout',
+    register: '/register',
+    info: '/authInfo',
   },
 
   analyze: {
-    options: "/options",
-    result: "/result",
+    options: '/options',
+    result: '/result',
   },
   HISTORY: {
     GET_HISTORY: '/history',

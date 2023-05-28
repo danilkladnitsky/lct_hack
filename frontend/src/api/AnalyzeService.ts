@@ -1,7 +1,7 @@
-import { API_ROUTES } from "constants/ApiRoutes";
-import { GetOptionsResponse, ResultRequest, ResultResponse } from "types/core";
+import { API_ROUTES } from 'constants/ApiRoutes';
+import { GetOptionsResponse, ResultRequest, ResultResponse } from 'types/core';
 
-import { api } from "./api";
+import { api } from './api';
 
 export default class AnalyzeService {
   static getOptions = () => {

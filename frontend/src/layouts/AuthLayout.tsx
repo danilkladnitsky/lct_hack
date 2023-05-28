@@ -6,7 +6,12 @@ interface AuthLayoutProps {
 }
 
 const AuthLayout: FC<AuthLayoutProps> = ({ children }) => {
-  return <Flex direction={'column'} align={'center'} justify={'center'} sx={{ flex: 1 }} p={'2%'}>{children}</Flex>;
+  return <Flex h={'100vh'}
+    direction={'column'}
+    align={'center'}
+    justify={'center'}
+    sx={{ flex: 1 }}
+    p={'2%'}>{children}</Flex>;
 };
 
 export default AuthLayout;
