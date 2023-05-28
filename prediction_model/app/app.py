@@ -32,7 +32,7 @@ def model_incedents():
     status = True
     result = main_model.predict_incedents([unom])
     # result_dict = {k: v for k, v in zip(unom_list, result)}
-    return {"unom": unom, "work_type": result[0]}
+    return {"unom": int(unom), "work_type": result[0]}
 
 
 if __name__ == '__main__':
