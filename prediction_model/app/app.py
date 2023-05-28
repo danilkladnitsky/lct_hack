@@ -12,13 +12,13 @@ def model_works():
     content = request.get_json()
     unom_list = content['unom']
     included_source = content['source']
-    includet_work_type = content['work_type']
+    included_work_type = content['work_type']
     start_date = content['start_date']
     end_date = content['end_date']
     status = True
-    result = main_model.predict_works(unom_list, included_source, includet_work_type)
+    result = main_model.predict_works(unom_list, included_source, included_work_type)
     result_dict = {k: v for k, v in zip(unom_list, result)}
-    return {"success": status, "result": result_dict}
+    return {"unom": result_dict}
 
 
 @app.route('/model_state_incedents', methods=['POST'])
@@ -32,7 +32,7 @@ def model_incedents():
     status = True
     result = main_model.predict_incedents(unom_list)
     result_dict = {k: v for k, v in zip(unom_list, result)}
-    return {"success": status, "result": result_dict}
+    return {"result": result_dict}
 
 
 if __name__ == '__main__':

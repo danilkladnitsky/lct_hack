@@ -1,4 +1,4 @@
-def convertIncidentsToWork(cursor, incident_list, included_source=[], includet_work_type=[]):
+def convert_incidents_to_work(cursor, incident_list, included_source=[], includet_work_type=[]):
     result_list = []
     for incident in incident_list:
         query = f"SELECT DISTINCT source FROM incident_source WHERE name = '{incident}';"
@@ -16,3 +16,4 @@ def convertIncidentsToWork(cursor, incident_list, included_source=[], includet_w
                     result_list.append(work)
 
     return result_list
+
