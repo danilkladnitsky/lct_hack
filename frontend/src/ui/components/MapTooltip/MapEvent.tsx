@@ -1,6 +1,5 @@
 import React from 'react';
 import { Badge, Button, Card, Group, Text } from '@mantine/core';
-import { EventRecord } from 'types/event';
 import { MapData } from 'types/map';
 import convertEventsToMapData from 'utils/convertEventsToMapData';
 
@@ -10,10 +9,11 @@ import styles from './MapEvent.module.scss';
 
 interface Props {
   item: MapData;
-  canPick?: boolean;
 }
-const MapEvent = ({ item, canPick }: Props) => {
+const MapEvent = ({ item }: Props) => {
   const eventData = convertEventsToMapData([item]);
+
+  const canPick = item.layer === 'address';
 
   const getEventType = () => {
     switch (item?.layer) {
