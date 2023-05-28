@@ -1,7 +1,8 @@
 import React, { ReactNode, useEffect, } from 'react';
 import { Button, Drawer, MultiSelect, Stack, Text } from '@mantine/core';
-import { DatePickerInput } from '@mantine/dates';
+import { DatePickerInput, DatesRangeValue } from '@mantine/dates';
 import useGetOptions from 'api/hooks/use-get-options';
+import useSendAnalyze from 'api/hooks/use-send-analyze';
 import { Analyze, } from 'tabler-icons-react';
 import { ResultRequest } from 'types/core';
 import Title from 'ui/shared/Title/Title';
@@ -20,7 +21,9 @@ type Props = {
 
 const AnalyzeForm = ({ children }: Props) => {
   const analyzeFormData = useCombinedStore(state => state.analyzeRequest);
-  const { mutate: fetchOptions } = useGetOptions();
+  const { mutate: fetchOptions, status: optionsStatus } = useGetOptions();
+  const { mutate: sendAnalyze, status: analysisStatus } = useSendAnalyze();
+
   const { analyzeFrameVisible, setAnalyzeFrameVisibility, options, updateRequest } = useCombinedStore();
 
   const closeForm = () => {
@@ -31,8 +34,16 @@ const AnalyzeForm = ({ children }: Props) => {
     fetchOptions();
   }, []);
 
+  const requestAnalysis = () => {
+    sendAnalyze(analyzeFormData);
+  };
+
   const updateForm = (property: keyof ResultRequest, value: any) => {
     switch (property) {
+    case 'start_time':
+      return updateRequest({ start_time: value });
+    case 'end_time':
+      return updateRequest({ end_time: value });
     case 'source':
       return updateRequest({ source: value });
     case 'work_type':
@@ -41,6 +52,11 @@ const AnalyzeForm = ({ children }: Props) => {
     default:
       return updateRequest({ address: value });
     }
+  };
+
+  const saveDateRange = ([start, end]: DatesRangeValue) => {
+    updateForm('start_time', start);
+    updateForm('end_time', end);
   };
 
   return (
@@ -85,12 +101,15 @@ const AnalyzeForm = ({ children }: Props) => {
             placeholder="Диапазон прогнозирования"
             type="range"
             locale="ru"
+            onChange={saveDateRange}
           />
         </Stack>
         <Stack className={styles.controls}>
           <Button
             leftIcon={<Analyze />}
             fullWidth
+            onClick={requestAnalysis}
+            loading={analysisStatus === 'loading'}
           >Прогнозировать
           </Button>
           <Button

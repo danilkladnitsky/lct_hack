@@ -7,13 +7,14 @@ import { ResultRequest, ResultResponse } from 'types/core';
 type AnalyzeState = {
   options: AnalyzeOptions | null;
   analyzeRequest: ResultRequest;
-  result: ResultResponse | null;
+  analyzeResponse: ResultResponse | null;
 };
 
 type AnalyzeActions = {
   setOptions: (data: AnalyzeOptions) => void;
   setResult: (data: ResultResponse) => void;
   updateRequest: (data: Partial<ResultRequest>) => void;
+  setAnalyzeResponse: (data: ResultResponse) => void;
 };
 
 export type AnalyzeSlice = AnalyzeState & AnalyzeActions;
@@ -24,13 +25,10 @@ const initialState = {
     source: [],
     work_type: [],
     address: [],
-    unom: [],
-    longitude: [],
-    latitude: [],
     start_time: '',
     end_time: '',
   },
-  result: null,
+  analyzeResponse: null
 };
 
 export const createAnalyzeSlice: StateCreator<AnalyzeSlice> = (set, state) => ({
@@ -52,6 +50,8 @@ export const createAnalyzeSlice: StateCreator<AnalyzeSlice> = (set, state) => ({
     const updated = { ...analyzeRequest, ...data };
 
     set({ analyzeRequest: updated });
-
+  },
+  setAnalyzeResponse: (data) => {
+    set({ analyzeResponse: data });
   }
 });

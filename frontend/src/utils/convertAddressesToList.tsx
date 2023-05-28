@@ -3,9 +3,9 @@ import { MapAddress } from 'types/map';
 
 const convertToAddressesItems = (data: MapAddress[], selectedItems?: string[]): SelectItem[] => {
   return data.map(item => {
-    const selected = (selectedItems || []).includes(item.unom);
+    const selected = !!(selectedItems || []).includes(item.unom);
 
-    return ({ value: item.unom.toString(), label: item.address, selected });
+    return { value: item.unom.toString(), label: item.address, selected };
   });
 };
 
