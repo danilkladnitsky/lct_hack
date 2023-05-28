@@ -1,7 +1,6 @@
-import React, { ReactNode, useEffect, } from 'react';
+import React, { ReactNode } from 'react';
 import { Button, Drawer, MultiSelect, Stack, Text } from '@mantine/core';
 import { DatePickerInput, DatesRangeValue } from '@mantine/dates';
-import useGetOptions from 'api/hooks/use-get-options';
 import useSendAnalyze from 'api/hooks/use-send-analyze';
 import { Analyze, } from 'tabler-icons-react';
 import { ResultRequest } from 'types/core';
@@ -21,7 +20,6 @@ type Props = {
 
 const AnalyzeForm = ({ children }: Props) => {
   const analyzeFormData = useCombinedStore(state => state.analyzeRequest);
-  const { mutate: fetchOptions } = useGetOptions();
   const { mutate: sendAnalyze, status: analysisStatus } = useSendAnalyze();
 
   const { analyzeFrameVisible, setAnalyzeFrameVisibility, options, updateRequest } = useCombinedStore();
@@ -29,10 +27,6 @@ const AnalyzeForm = ({ children }: Props) => {
   const closeForm = () => {
     setAnalyzeFrameVisibility(false);
   };
-
-  useEffect(() => {
-    fetchOptions();
-  }, []);
 
   const requestAnalysis = () => {
     sendAnalyze(analyzeFormData);

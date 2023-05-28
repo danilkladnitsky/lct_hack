@@ -24,12 +24,14 @@ interface Props {
   viewSettings: MapSettings;
   data: MapData[];
   onPointClick?: (point: MapObject | null) => void;
+  showHeatMap: boolean;
 }
 
 const Map = ({
   viewSettings = DEFAULT_MAP_PARAMETERS,
   data,
-  onPointClick
+  onPointClick,
+  showHeatMap
 }: Props) => {
   const tooltipHandler = ({ object }: {object: MapObject}) => {
     if (!object) return null;
@@ -42,8 +44,9 @@ const Map = ({
       <DeckGL
         controller={true}
         initialViewState={viewSettings}
-        layers={renderLayers(data)}
+        layers={renderLayers(data, showHeatMap)}
         onClick={tooltipHandler}
+        style={{ mixBlendMode: 'lighten' }}
         onViewStateChange={() => {
           onPointClick?.(null);
         }}

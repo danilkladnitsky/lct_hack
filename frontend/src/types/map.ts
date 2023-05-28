@@ -23,6 +23,7 @@ export type MapData = {
     layer: string;
     value: string;
     unom: number;
+    weight?: number;
 }
 
 export type MapObject = {
@@ -39,3 +40,8 @@ export type MapTooltipObject = {
 export type MapAddress = MapBaseEntity<'address'>;
 
 export type Incident = MapBaseEntity<'incident'>;
+
+export type IncidentCount = {
+    unom: Unom;
+    count: number;
+}

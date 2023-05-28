@@ -1,7 +1,7 @@
-import { HexagonLayer } from '@deck.gl/aggregation-layers';
+import { HeatmapLayer,HexagonLayer } from '@deck.gl/aggregation-layers';
 import { MapData } from 'types/map';
 
-export function renderLayers(data: MapData[]) {
+export function renderLayers(data: MapData[], showHeatMap: boolean) {
   const colorRange = [
     [1, 152, 189],
     [73, 227, 206],
@@ -25,14 +25,27 @@ export function renderLayers(data: MapData[]) {
     data,
     getPosition: (d) => [+d.longitude, +d.latitude],
     pickable: true,
-    radius: 100,
+    radius: 200,
     material,
-    elevationRange: [0, 20],
+    elevationRange: [0, 200],
+    elevationScale: 10,
     extruded: true,
     transitions: {
       elevationScale: 10
     }
   });
 
-  return [eventsLayer];
+  const heatmapLayer = new HeatmapLayer({
+    data,
+    id: 'heatmp-layer',
+    pickable: false,
+    getPosition: (d) => [+d.longitude, +d.latitude],
+    getWeight: (d) => +d.longitude,
+    radiusPixels: 1000,
+    intensity: 0.03,
+    threshold: 0.03,
+    aggregation: 'SUM'
+  });
+
+  return showHeatMap ? [eventsLayer, heatmapLayer] : [eventsLayer];
 }

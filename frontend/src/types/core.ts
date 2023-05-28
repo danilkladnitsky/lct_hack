@@ -15,3 +15,9 @@ export type ResultResponse = {
   longitude: Longitude;
   address: string;
 }[];
+
+export type ResultHistory = {
+  id: number;
+  request: ResultRequest;
+  response: ResultResponse;
+}
