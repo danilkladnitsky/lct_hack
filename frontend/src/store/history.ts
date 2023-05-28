@@ -1,6 +1,5 @@
-import { StateCreator } from "zustand";
-import { MOCKED_HISTORY_RECORDS } from "mocked/history";
-import { HistoryRecord } from "types/history";
+import { StateCreator } from 'zustand';
+import { HistoryRecord } from 'types/history';
 
 type State = {
     records: HistoryRecord[];
@@ -15,7 +14,7 @@ type Actions = {
 export type HistorySlice = State & Actions;
 
 const initialState: State = {
-  records: MOCKED_HISTORY_RECORDS, //TODO: remove mocked data
+  records: [], //TODO: remove mocked data
   selectedRecords: null,
 };
 

@@ -1,8 +1,15 @@
-import { QueryStatus } from '@tanstack/react-query';
+
+import { ResultRequest } from './core';
 
 export type HistoryRecord = {
-    id: Id;
-    date: Date;
-    status: QueryStatus;
-    name: string;
+    login: string;
+    created_at: string;
+    request: ResultRequest;
+    response: {
+        address: string;
+        unom: Unom;
+        latitude: Latitude;
+        longitude: Longitude;
+        work_type: string[];
+    }
 }

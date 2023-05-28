@@ -28,10 +28,13 @@ const History = () => {
 
 const RecordList = () => {
   const records = useCombinedStore(state => state.records);
+
   return <div className={styles.recordList}>
-    {records.map((record, index) => <HistoryRecord number={index + 1}
-      item={record}
-      key={record.id} />)}
+    {records.filter(r => r.response?.work_type)
+      .map((record, index) => <HistoryRecord number={index + 1}
+        item={record}
+        key={index}
+        date={record.created_at} />)}
   </div>;
 };
 
