@@ -13,7 +13,7 @@ type MapBaseEntity<Type extends 'incident' | 'address' | 'result'> = {
     longitude: Longitude;
     unom: string;
     address: string;
-    type: Type;
+    type?: Type;
 }
 
 export type MapData = {

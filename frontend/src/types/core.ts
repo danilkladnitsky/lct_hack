@@ -1,15 +1,11 @@
-export type GetOptionsResponse = {
-  source: string[];
-  work_type: string[];
-  address: string[];
-  unom: number[];
-  longitude: number[];
-  latitude: number[];
-};
+import { SourceType } from './analyze';
 
-export type ResultRequest = GetOptionsResponse & {
+export type ResultRequest = {
   start_time: string;
   end_time: string;
+  work_type: string[];
+  address: Unom[];
+  source: SourceType[];
 };
 
 export type ResultResponse = {

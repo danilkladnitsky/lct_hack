@@ -1,23 +1,23 @@
 import { useMutation } from '@tanstack/react-query';
-import HistoryApi from 'api/historyApi';
+import AnalyzeService from 'api/CoreService';
 
 import useCombinedStore from 'store';
 
-const useGetHistory = () => {
-  const setHistory = useCombinedStore(state => state.setHistory);
+const useGetOptions = () => {
+  const setOptions = useCombinedStore(state => state.setOptions);
 
   return useMutation(
-    async () => await HistoryApi.getHistoryRecords(),
+    async () => await AnalyzeService.getOptions(),
     {
       onError: (error) => {
         console.log(error);
       },
       onSuccess: (response) => {
         const { data } = response;
-        setHistory(data);
+        setOptions(data);
       },
     },
   );
 };
 
-export default useGetHistory;
+export default useGetOptions;

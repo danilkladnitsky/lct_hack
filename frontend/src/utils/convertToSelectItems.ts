@@ -1,6 +1,6 @@
-import { SelectItem } from "@mantine/core";
+import { SelectItem } from '@mantine/core';
 
-const convertToSelectItems = (data: string[], selectedItems?: string[]): SelectItem[] => {
+const convertToSelectItems = (data: any[], selectedItems?: string[]): SelectItem[] => {
   return data.map(item => {
     const selected = (selectedItems || []).includes(item);
 
