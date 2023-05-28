@@ -72,7 +72,7 @@
     "prefer-const": "error",
     "object-curly-spacing": ["error", "always"],
     "no-multi-spaces": "error",
-    "quotes": ["error", "double"],
+    "quotes": ["error", "single"],
     "jsx-quotes": ["error", "prefer-double"],
     "indent": ["warn", 2]
   }
