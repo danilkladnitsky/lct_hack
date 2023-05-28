@@ -14,7 +14,7 @@ import MapTooltip from '../MapTooltip/MapTooltip';
 import styles from './Dashboard.module.scss';
 
 const Dashboard = () => {
-  const { events, mapSettings, setPoint, selectedPoint, analyzeResponse, options, incidentCount, isLogined } = useCombinedStore();
+  const { mapSettings, setPoint, selectedPoint, analyzeResponse, options, incidentCount, isLogined } = useCombinedStore();
 
   const { mutate: fetchOptions } = useGetOptions();
   const { mutate: fetchIncidents } = useGetIncidentsCount();
@@ -30,7 +30,7 @@ const Dashboard = () => {
     ...convertAddressesToMapData(options?.addresses || [],
       (u) => incidentCount.find(i => i.unom === u)?.count || 0),
     ...convertAnalysisToMapData(analyzeResponse || [])
-  ]), [events, analyzeResponse]);
+  ]), [options, analyzeResponse]);
 
   return (
     <div className={styles.dashboard}>
