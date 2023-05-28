@@ -49,7 +49,7 @@ const MapEvent = ({ item, canPick }: Props) => {
 
       <Text size="sm"
         color="dimmed">
-        {item.description}
+        {item.value}
       </Text>
 
       {canPick && <Button variant="light"
