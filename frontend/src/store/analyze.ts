@@ -22,11 +22,11 @@ type AnalyzeActions = {
 export type AnalyzeSlice = AnalyzeState & AnalyzeActions;
 
 const initialState = {
-  options: null,
+  options: {},
   analyzeRequest: {
     source: [],
     work_type: [],
-    address: [],
+    unom: [],
     start_time: '',
     end_time: '',
   },
@@ -58,13 +58,13 @@ export const createAnalyzeSlice: StateCreator<AnalyzeSlice> = (set, state) => ({
   },
   pickAddress: (unom) => {
     const { analyzeRequest } = state();
-    const address = analyzeRequest.address.includes(unom)
-      ? analyzeRequest.address.filter(a => a !== unom)
-      : [...analyzeRequest.address, unom];
+    const address = analyzeRequest.unom.includes(unom)
+      ? analyzeRequest.unom.filter(a => a !== unom)
+      : [...analyzeRequest.unom, unom];
 
     const updatedRequest = {
       ...analyzeRequest,
-      address
+      unom: address
     };
 
     set({ analyzeRequest: updatedRequest });

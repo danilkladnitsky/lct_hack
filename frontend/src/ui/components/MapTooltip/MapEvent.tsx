@@ -35,7 +35,7 @@ const MapEvent = ({ item }: Props) => {
   const type = getEventType(item.layer);
   const canPick = item.layer === 'address';
 
-  const wasPicked = analyzeRequest.address.includes(item.unom);
+  const wasPicked = analyzeRequest.unom.includes(item.unom);
 
   const incidentsCountValue = incidentsCount.find(c => c.unom === item.unom)?.count;
 
