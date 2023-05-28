@@ -18,7 +18,7 @@ def model_works():
     status = True
     result = main_model.predict_works([unom], included_source, included_work_type)
     # result_dict = {k: v for k, v in zip(unom_list, result)}
-    return {"unom": unom, "work_type": result[0]}
+    return {"unom": int(unom), "work_type": result[0]}
 
 
 @app.route('/model_state_incedents', methods=['POST'])
