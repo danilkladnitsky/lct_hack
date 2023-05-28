@@ -8,6 +8,14 @@ export type MapSettings = {
     minZoom: number;
 }
 
+type MapBaseEntity<Type extends 'incident' | 'address' | 'result'> = {
+    latitude: Latitude;
+    longitude: Longitude;
+    unom: string;
+    address: string;
+    type: Type;
+}
+
 export type MapData = {
     latitude: Latitude;
     longitude: Longitude;
@@ -25,3 +33,7 @@ export type MapTooltipObject = {
     screenCoord: [number, number];
     source: MapData;
 }
+
+export type MapAddress = MapBaseEntity<'address'>;
+
+export type Incident = MapBaseEntity<'incident'>;

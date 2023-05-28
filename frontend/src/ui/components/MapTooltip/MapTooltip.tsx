@@ -34,8 +34,11 @@ const MapTooltip = ({ points, isOpened }: Props) => {
         {points?.map(point => <MapEvent key={point.index}
           item={point.source} />)
         }
-        <Button onClick={close}
-          fullWidth>Закрыть</Button>
+        <Button
+          onClick={close}
+          fullWidth
+          color={'red'}
+        >Закрыть</Button>
       </Stack>}
     </Drawer>
   );
