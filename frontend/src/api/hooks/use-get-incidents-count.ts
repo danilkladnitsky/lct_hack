@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import AnalyzeService from 'api/CoreService';
+import AnalyzeService from 'api/AnalyzeService';
 
 import useCombinedStore from 'store';
 

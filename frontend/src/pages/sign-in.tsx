@@ -1,10 +1,13 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Button, Flex, Input, Paper, PasswordInput, Text } from '@mantine/core';
+import { Box, Button, Flex, Input, Paper, PasswordInput, Text, Title } from '@mantine/core';
+import { AuthService } from 'api';
 import { useFormik } from 'formik';
 import withLayout from 'hoc/withLayout';
 import { AuthLayout } from 'layouts';
 import * as yup from 'yup';
+
+import useCombinedStore from 'store';
 
 const loginValidation = yup.object().shape({
   login: yup.string().email('Неверный формат').required('Обязательное поле'),
@@ -13,14 +16,22 @@ const loginValidation = yup.object().shape({
 
 const SignIn: FC = () => {
 
+  const { login } = useCombinedStore();
+
   const formik = useFormik({
     initialValues: {
       login: '',
       password: '',
     },
     isInitialValid: false,
-    onSubmit: values => {
-      console.log(values);
+    onSubmit: async values => {
+      try {
+        await AuthService.login(values);
+        login();
+
+      } catch (e) {
+        console.debug(e);
+      }
     },
     validationSchema: loginValidation,
   });
@@ -34,9 +45,9 @@ const SignIn: FC = () => {
         w={'320px'}
         shadow="xl"
         p="md"
-        radius={'md'}>
-        <Text fz={'xl'}
-          fw={600}>Вход</Text>
+        radius={'md'}
+        bg={'#252525'}>
+        <Title order={2}>Вход</Title>
         <Flex w={'100%'}
           direction={'column'}
           gap={'10px'}

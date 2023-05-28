@@ -1,4 +1,4 @@
-import { API_ROUTES } from "constants/ApiRoutes";
+import { API_ROUTES } from 'constants/ApiRoutes';
 import {
   InfoResponse,
   LoginRequest,
@@ -6,9 +6,9 @@ import {
   LogoutResponse,
   RegisterRequest,
   RegisterResponse,
-} from "types/auth";
+} from 'types/auth';
 
-import { api } from "./api";
+import { api } from './api';
 
 export default class AuthService {
   static info = () => {
