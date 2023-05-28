@@ -27,7 +27,7 @@ const Dashboard = () => {
   }, [isLogined]);
 
   const mapPoints = useMemo(() => ([
-    ...convertAddressesToMapData(options?.addresses || [],
+    ...convertAddressesToMapData(options?.addresses.filter((a, i) => i % 10 === 0) || [],
       (u) => incidentCount.find(i => i.unom === u)?.count || 0),
     ...convertAnalysisToMapData(analyzeResponse || [])
   ]), [options, analyzeResponse]);
