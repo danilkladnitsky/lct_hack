@@ -29,7 +29,7 @@ const AnalyzeForm = ({ children }: Props) => {
   };
 
   const requestAnalysis = () => {
-    sendAnalyze(analyzeFormData);
+    sendAnalyze({ ...analyzeFormData, unom: analyzeFormData.unom.map(v => v.toString()) });
   };
 
   const updateForm = (property: keyof ResultRequest, value: any) => {
@@ -84,7 +84,7 @@ const AnalyzeForm = ({ children }: Props) => {
           />
           <Text>Выберите адрес</Text>
           <MultiSelect
-            value={analyzeFormData.unom}
+            value={analyzeFormData.unom.map(v => v.toString())}
             data={convertToAddressesItems(options?.addresses || [])}
             limit={20}
             searchable
