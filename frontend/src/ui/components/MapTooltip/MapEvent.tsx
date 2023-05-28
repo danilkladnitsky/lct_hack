@@ -3,6 +3,8 @@ import { Badge, Button, Card, Group, Text } from '@mantine/core';
 import { MapData } from 'types/map';
 import convertEventsToMapData from 'utils/convertEventsToMapData';
 
+import useCombinedStore from 'store';
+
 import Map from '../Map/Map';
 
 import styles from './MapEvent.module.scss';
@@ -11,9 +13,13 @@ interface Props {
   item: MapData;
 }
 const MapEvent = ({ item }: Props) => {
+  const pickAddress = useCombinedStore(state => state.pickAddress);
+  const analyzeRequest = useCombinedStore(state => state.analyzeRequest);
   const eventData = convertEventsToMapData([item]);
 
   const canPick = item.layer === 'address';
+
+  const wasPicked = analyzeRequest.address.includes(item.unom);
 
   const getEventType = () => {
     switch (item?.layer) {
@@ -56,8 +62,10 @@ const MapEvent = ({ item }: Props) => {
         color="blue"
         fullWidth
         mt="md"
-        radius="md">
-        Выбрать для прогноза
+        radius="md"
+        onClick={() => pickAddress(item.unom)}
+      >
+        {wasPicked ? 'Снять выделение' : 'Выбрать для прогноза'}
       </Button>}
     </Card>
   );

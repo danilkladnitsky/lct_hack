@@ -21,7 +21,7 @@ type Props = {
 
 const AnalyzeForm = ({ children }: Props) => {
   const analyzeFormData = useCombinedStore(state => state.analyzeRequest);
-  const { mutate: fetchOptions, status: optionsStatus } = useGetOptions();
+  const { mutate: fetchOptions } = useGetOptions();
   const { mutate: sendAnalyze, status: analysisStatus } = useSendAnalyze();
 
   const { analyzeFrameVisible, setAnalyzeFrameVisibility, options, updateRequest } = useCombinedStore();

@@ -5,4 +5,5 @@ export type EventRecord = {
     name: string;
     description: string;
     type: string;
+    unom: number;
 }

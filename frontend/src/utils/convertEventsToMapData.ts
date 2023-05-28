@@ -8,7 +8,8 @@ const convertEventsToMapData = (events: EventRecord[]): MapData[] => {
     longitude: e.longitude,
     layer: 'incident',
     name: e.name,
-    value: e.description
+    value: e.description,
+    unom: e.unom
   }));
 };
 

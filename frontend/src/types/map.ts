@@ -22,6 +22,7 @@ export type MapData = {
     name: string;
     layer: string;
     value: string;
+    unom: number;
 }
 
 export type MapObject = {

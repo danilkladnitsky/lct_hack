@@ -16,6 +16,7 @@ type AnalyzeActions = {
   setResult: (data: ResultResponse) => void;
   updateRequest: (data: Partial<ResultRequest>) => void;
   setAnalyzeResponse: (data: ResultResponse) => void;
+  pickAddress: (unom: Unom) => void;
 };
 
 export type AnalyzeSlice = AnalyzeState & AnalyzeActions;
@@ -54,5 +55,18 @@ export const createAnalyzeSlice: StateCreator<AnalyzeSlice> = (set, state) => ({
   },
   setAnalyzeResponse: (data) => {
     set({ analyzeResponse: data });
+  },
+  pickAddress: (unom) => {
+    const { analyzeRequest } = state();
+    const address = analyzeRequest.address.includes(unom)
+      ? analyzeRequest.address.filter(a => a !== unom)
+      : [...analyzeRequest.address, unom];
+
+    const updatedRequest = {
+      ...analyzeRequest,
+      address
+    };
+
+    set({ analyzeRequest: updatedRequest });
   }
 });

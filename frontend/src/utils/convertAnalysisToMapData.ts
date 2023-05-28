@@ -9,6 +9,7 @@ const convertAnalysisToMapData = (analysis: ResultResponse): MapData[] => {
     layer: 'analysis',
     name: a.address,
     value: (a.work || []).join(', '),
+    unom: a.unom
   }));
 };
 
