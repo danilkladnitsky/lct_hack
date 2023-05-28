@@ -14,7 +14,7 @@ import MapTooltip from '../MapTooltip/MapTooltip';
 import styles from './Dashboard.module.scss';
 
 const Dashboard = () => {
-  const { events, mapSettings, setPoint, selectedPoint, analyzeResponse, options } = useCombinedStore();
+  const { events, mapSettings, setPoint, selectedPoint, analyzeResponse, options, incidentCount } = useCombinedStore();
 
   const { mutate: fetchOptions } = useGetOptions();
   const { mutate: fetchIncidents } = useGetIncidentsCount();
@@ -25,7 +25,8 @@ const Dashboard = () => {
   }, []);
 
   const mapPoints = useMemo(() => ([
-    ...convertAddressesToMapData(options?.addresses || []),
+    ...convertAddressesToMapData(options?.addresses || [],
+      (u) => incidentCount.find(i => i.unom === u)?.count || 0),
     ...convertAnalysisToMapData(analyzeResponse || [])
   ]), [events, analyzeResponse]);
 
@@ -34,6 +35,7 @@ const Dashboard = () => {
       <Map
         viewSettings={mapSettings}
         data={mapPoints}
+        showHeatMap
         onPointClick={setPoint}
       />
       <MapLayers />

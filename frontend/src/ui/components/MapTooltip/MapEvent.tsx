@@ -49,6 +49,7 @@ const MapEvent = ({ item }: Props) => {
       <div className={styles.mapPreview}>
         <Map
           data={eventData}
+          showHeatMap={false}
           viewSettings={{ latitude: item.latitude, longitude: item.longitude, zoom: 14, minZoom: 14, maxZoom: 14 }} />
       </div>
       <Group

@@ -1,6 +1,6 @@
 import { MapAddress, MapData } from 'types/map';
 
-const convertAddressesToMapData = (data: MapAddress[]): MapData[] => {
+const convertAddressesToMapData = (data: MapAddress[], weight?: (unom: number) => number): MapData[] => {
   return data.map(d => ({
     ...d,
     type: 'address',
@@ -8,7 +8,8 @@ const convertAddressesToMapData = (data: MapAddress[]): MapData[] => {
     longitude: +d.longitude,
     name: d.address,
     layer: 'address',
-    value: `${34} инцидента`
+    value: `${34} инцидента`,
+    weight:  weight ? weight(d.unom) : 0
   }));
 };
 
