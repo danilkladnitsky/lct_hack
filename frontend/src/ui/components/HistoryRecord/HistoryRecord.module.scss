@@ -11,8 +11,18 @@
 
     cursor: pointer;
 
+    overflow: hidden;
+
     &:hover {
         border-left: 2px solid var(--primary-accent);
+    }
+
+
+    &>div {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-height: -webkit-fill-available;
+        white-space: nowrap;
     }
 }
 

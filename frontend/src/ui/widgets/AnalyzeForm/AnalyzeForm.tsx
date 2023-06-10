@@ -30,7 +30,6 @@ const AnalyzeForm = ({ children }: Props) => {
 
   const requestAnalysis = async () => {
     await sendAnalyze({ ...analyzeFormData, unom: (analyzeFormData?.unom || []).map(v => +v) });
-    closeForm();
   };
 
   const updateForm = (property: keyof ResultRequest, value: any) => {

@@ -14,7 +14,7 @@ export type ResultResponse = {
   latitude: Latitude;
   longitude: Longitude;
   address: string;
-}[];
+};
 
 export type ResultHistory = {
   id: number;

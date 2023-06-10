@@ -1,11 +1,11 @@
 import React from 'react';
+import { CSVLink } from 'react-csv';
 import { Loader } from '@mantine/core';
 import { QueryStatus } from '@tanstack/react-query';
 import COLORS from 'const/colors';
 import { AlertCircle, CircleCheck,CloudDownload, Refresh } from 'tabler-icons-react';
 import { HistoryRecord as HistoryRecordType } from 'types/history';
 import ActionButton from 'ui/shared/ActionButton/ActionButton';
-import formatDate from 'utils/formatDate';
 
 import styles from './HistoryRecord.module.scss';
 
@@ -15,34 +15,37 @@ interface Props {
   date: string;
 }
 
-const HistoryRecord = ({ item, date }: Props) => {
-  const { response } = item;
+const HistoryRecord = ({ item, }: Props) => {
+  const { response, request } = item;
 
   return (
     <div className={styles.historyRecord}>
       <div className={styles.status}>
         <RecordStatus status={'success'} />
       </div>
-      <div>{formatDate(date)}</div>
-      <div>{response.address}</div>
-      <div>{(response.work_type || []).join(',')}</div>
+      <div>{request.source.join(', ')}</div>
+      <div>{item.request.work_type.join(', ')}</div>
+      <div>Результат: {(response.work_type || []).join(',') || 'Нельзя спрогнозировать'}</div>
       <div>
-        <RecordAction status={'success'} />
+        <RecordAction status={'success'}
+          data={response} />
       </div>
     </div>
   );
 };
 
-const RecordAction = ({ status }: { status: QueryStatus }) => {
+const RecordAction = ({ status, data }: { status: QueryStatus, data: any }) => {
   if (status === 'error') {
     return <ActionButton variant={'outline'}>
       <Refresh />
     </ActionButton>;
   }
 
-  return <ActionButton variant={'outline'}>
-    <CloudDownload />
-  </ActionButton>;
+  return <CSVLink data={JSON.stringify(data)}>
+    <ActionButton variant={'outline'}>
+      <CloudDownload />
+    </ActionButton>
+  </CSVLink> ;
 };
 
 const RecordStatus = ({ status }: {status: QueryStatus}) => {
