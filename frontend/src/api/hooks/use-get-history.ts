@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import HistoryApi from 'api/HistoryApi';
+import HistoryApi from 'api/historyApi';
 
 import useCombinedStore from 'store';
 
@@ -19,8 +19,8 @@ const useGetHistory = () => {
           setHistory(data.map(p => ({
             created_at: p.created_at,
             login: p.login,
-            request: JSON.stringify(p.request),
-            response: JSON.stringify(p.response)
+            request: JSON.parse(p.request),
+            response: JSON.parse(p.response)
           })));
 
         } catch (err) {

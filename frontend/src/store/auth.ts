@@ -4,7 +4,7 @@ type EbaloPsa = () => void;
 
 type AuthState = {
   isLogined: boolean;
-  isLoading: boolean;
+  isPendingAuth: boolean;
   username: string | null;
 };
 
@@ -17,13 +17,13 @@ export type AuthSlice = AuthState & AuthActions;
 
 const initialState = {
   isLogined: true,
-  isLoading: true,
+  isPendingAuth: true,
   username: null,
 
 };
 
 export const createAuthSlice: StateCreator<AuthSlice> = (set) => ({
   ...initialState,
-  login: () => set(() => ({ isLogined: true, isLoading: false })),
-  logout: () => set(() => ({ isLogined: false, isLoading: false })),
+  login: () => set(() => ({ isLogined: true, isPendingAuth: false })),
+  logout: () => set(() => ({ isLogined: false, isPendingAuth: false })),
 });

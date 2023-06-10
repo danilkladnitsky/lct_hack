@@ -39,7 +39,16 @@ const MapEvent = ({ item }: Props) => {
 
   const incidentsCountValue = incidentsCount.find(c => c.unom === item.unom)?.count;
 
-  const description = item.layer === 'address' ? `Кол-во инцидентов: ${incidentsCountValue || 0}` : item.value;
+  const getDescription = () => {
+    switch (item.layer) {
+    case 'address':
+      return `Кол-во инцидентов: ${incidentsCountValue || 0}`;
+    case 'analysis':
+      return item.value || 'Рекомендуется провести техническую инспецию';
+    default:
+      return item.value;
+    }
+  };
 
   return (
     <Card shadow="sm"
@@ -67,7 +76,7 @@ const MapEvent = ({ item }: Props) => {
           </Badge>
           <Text size="sm"
             color="dimmed">
-            {description}
+            {getDescription()}
           </Text>
         </Stack>
         {canPick && <Button variant="light"
